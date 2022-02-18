@@ -1,12 +1,17 @@
 fileFormatVersion: 2
-guid: 2916e7c00ca11284dbea89b92137db73
+guid: 9bd8501d9d8de3743a165fe8ec772153
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PumpkinHeadMat
+    second: {fileID: 2100000, guid: 09fd6fd7004bf6e49a2dac12967d5261, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
