@@ -1,12 +1,17 @@
 fileFormatVersion: 2
-guid: 2916e7c00ca11284dbea89b92137db73
+guid: 41b085f546f903a42b68b2275709c477
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VampMat
+    second: {fileID: 2100000, guid: 6464add832d3be244aa8ab55d2e4e93d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +93,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.002
+    globalScale: 0.2
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
