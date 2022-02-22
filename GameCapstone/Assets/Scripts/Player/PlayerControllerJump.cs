@@ -30,7 +30,7 @@ public partial class PlayerController
     public void JumpInput()
     {
         jumpVariables.scrollWheelDelta = Input.GetAxis("Mouse ScrollWheel");
-        if (Input.GetKeyDown(KeyCode.Space) || jumpVariables.scrollWheelDelta > 0 || Input.GetButtonDown("GamePadJump") )
+        if (Input.GetKeyDown(KeyCode.Space) || jumpVariables.scrollWheelDelta > 0)
         {
             _jumpBuffer = jumpVariables.jumpBuffer;
         }
