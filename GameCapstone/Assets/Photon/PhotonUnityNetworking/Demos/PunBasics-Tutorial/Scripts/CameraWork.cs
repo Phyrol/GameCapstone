@@ -110,7 +110,7 @@ namespace Photon.Pun.Demo.PunBasics
 			cameraOffset.y = height;
 			cameraOffset.x = 0;
 
-			cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
+			cameraTransform.position = this.transform.position + cameraOffset;
 
 			//cameraTransform.position = Vector3.Lerp(cameraTransform.position, this.transform.position +this.transform.TransformVector(cameraOffset), smoothSpeed*Time.deltaTime);
 
@@ -123,10 +123,11 @@ namespace Photon.Pun.Demo.PunBasics
 		{
 			cameraOffset.z = -distance;
 			cameraOffset.y = height;
+			cameraOffset.x = 0;
 
-			cameraTransform.position = this.transform.position + this.transform.TransformVector(cameraOffset);
+			cameraTransform.position = this.transform.position; //+ this.transform.TransformVector(cameraOffset);
 
-			cameraTransform.LookAt(this.transform.position + centerOffset);
+			//cameraTransform.LookAt(this.transform.position + centerOffset);
 		}
 		#endregion
 	}

@@ -710,8 +710,8 @@ GameObject:
   - component: {fileID: 3934717455101080237}
   - component: {fileID: -6466226288779151538}
   - component: {fileID: -249392837939475592}
-  - component: {fileID: 346732843103630960}
-  - component: {fileID: 3063269202237711793}
+  - component: {fileID: 8563582119022108863}
+  - component: {fileID: 4643361569453102264}
   - component: {fileID: 8366290455214651610}
   m_Layer: 0
   m_Name: PhotonPlayer
@@ -867,7 +867,7 @@ MonoBehaviour:
     m_Bits: 0
   animator: {fileID: 3934717455006213429}
   mesh: {fileID: 3934717455006213431}
---- !u!114 &346732843103630960
+--- !u!114 &8563582119022108863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -886,12 +886,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 3063269202237711793}
+  - {fileID: 4643361569453102264}
   - {fileID: 7677262189552725828}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3063269202237711793
+--- !u!114 &4643361569453102264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -907,16 +907,16 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 4
+    InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 10
+    InterpolateLerpSpeed: 1
     ExtrapolateOption: 0
     ExtrapolateSpeed: 1
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 1
+    InterpolateOption: 0
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:

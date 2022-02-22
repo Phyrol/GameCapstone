@@ -18,10 +18,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         Debug.Log("Creating Player");
 
         GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), new Vector3(0, 2, 0), Quaternion.identity);
-        //GameObject camera = Instantiate(playerCam, player.transform.position + new Vector3(0, -0.8f, -10f), Quaternion.identity);
-        //camera.transform.parent = player.transform;
 
         DontDestroyOnLoad(player);
-        //DontDestroyOnLoad(camera);
     }
 }
