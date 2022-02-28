@@ -69,7 +69,7 @@ public partial class PlayerController
 
         if (Input.GetKey(KeyCode.D)) x = speedIncrease;
         else if (Input.GetKey(KeyCode.A)) x = -speedIncrease;
-        else if (Input.GetAxis("GamePadHorizontal") != 0) x = Input.GetAxis("GamePadHorizontal") * speedIncrease;
+        //else if (Input.GetAxis("GamePadHorizontal") != 0) x = Input.GetAxis("GamePadHorizontal") * speedIncrease;
         else x = 0;
         if (Mathf.Abs(x) > 0) animator.SetFloat("Speed", 1);
         else animator.SetFloat("Speed", 0);
