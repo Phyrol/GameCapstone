@@ -73,23 +73,11 @@ public partial class PlayerController
         {
             x = speedIncrease;
             transform.eulerAngles = new Vector3(0, 0, 0);
-            //if(!rotatedRight)
-            //{
-            //    transform.Rotate(0, 180, 0);
-            //    rotatedLeft = false;
-            //    rotatedRight = true;
-            //}
         }
         else if (Input.GetKey(KeyCode.A))
         {
             x = speedIncrease;
             transform.eulerAngles = new Vector3(0, 180, 0);
-            //if (!rotatedLeft)
-            //{
-            //    transform.Rotate(0, -180, 0);
-            //    rotatedRight = false;
-            //    rotatedLeft = true;
-            //}
         }
         //else if (Input.GetAxis("GamePadHorizontal") != 0) x = Input.GetAxis("GamePadHorizontal") * speedIncrease;
         else x = 0;
