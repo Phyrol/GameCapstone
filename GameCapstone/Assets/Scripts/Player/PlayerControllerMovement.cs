@@ -69,26 +69,32 @@ public partial class PlayerController
         speedIncrease = baseMovementVariables.walkSpeedIncrease;
         maxVelocity = baseMovementVariables.maxWalkVelocity;
 
-        if (Input.GetKey(KeyCode.D)) x = speedIncrease;
-        else if (Input.GetKey(KeyCode.A)) x = -speedIncrease;
+        if (Input.GetKey(KeyCode.D))
+        {
+            x = speedIncrease;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            //if(!rotatedRight)
+            //{
+            //    transform.Rotate(0, 180, 0);
+            //    rotatedLeft = false;
+            //    rotatedRight = true;
+            //}
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            x = speedIncrease;
+            transform.eulerAngles = new Vector3(0, 180, 0);
+            //if (!rotatedLeft)
+            //{
+            //    transform.Rotate(0, -180, 0);
+            //    rotatedRight = false;
+            //    rotatedLeft = true;
+            //}
+        }
         //else if (Input.GetAxis("GamePadHorizontal") != 0) x = Input.GetAxis("GamePadHorizontal") * speedIncrease;
         else x = 0;
         if (Mathf.Abs(x) > 0) animator.SetFloat("Speed", 1);
         else animator.SetFloat("Speed", 0);
-        if (x > 0 && !rotatedRight)
-        {
-            mesh.transform.Rotate(0, 180, 0);
-            rotatedLeft = false;
-            rotatedRight = true;
-        }
-        //mesh.transform.localScale = new Vector3(0.339f, 0.339f, 0.339f);
-        else if (x < 0 && !rotatedLeft)
-        {
-            //mesh.transform.localScale = new Vector3(0.339f, 0.339f, -0.339f);
-            mesh.transform.Rotate(0, -180, 0);
-            rotatedRight = false;
-            rotatedLeft = true;
-        }
     }
     private void GroundCheck()
     {
