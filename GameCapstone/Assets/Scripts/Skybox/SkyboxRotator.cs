@@ -13,12 +13,12 @@ public class SkyboxRotator : MonoBehaviour
     // The rate was made public to allow for easy editing.
     void FixedUpdate()
     {
-        RenderSettings.skybox.SetFloat("_Rotation", Mathf.Lerp(start, end, interpolateCount));
-        interpolateCount += interpolationRate;
-        if(RenderSettings.skybox.GetFloat("_Rotation") >= 360)
-        {
-            RenderSettings.skybox.SetFloat("_Rotation", 0);
-            interpolateCount = 0.0f;
-        }
+        //RenderSettings.skybox.SetFloat("_Rotation", Mathf.Lerp(start, end, interpolateCount));
+        //interpolateCount += interpolationRate;
+        //if(RenderSettings.skybox.GetFloat("_Rotation") >= 360)
+        //{
+        //    RenderSettings.skybox.SetFloat("_Rotation", 0);
+        //    interpolateCount = 0.0f;
+        //}
     }
 }
