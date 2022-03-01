@@ -6,6 +6,8 @@ public partial class PlayerController
 {
     public Animator animator;
     public GameObject mesh;
+    bool rotatedLeft = false;
+    bool rotatedRight = true;
     [System.Serializable]
     public class BaseMovementVariables
     {
@@ -67,14 +69,20 @@ public partial class PlayerController
         speedIncrease = baseMovementVariables.walkSpeedIncrease;
         maxVelocity = baseMovementVariables.maxWalkVelocity;
 
-        if (Input.GetKey(KeyCode.D)) x = speedIncrease;
-        else if (Input.GetKey(KeyCode.A)) x = -speedIncrease;
+        if (Input.GetKey(KeyCode.D))
+        {
+            x = speedIncrease;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            x = speedIncrease;
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
         //else if (Input.GetAxis("GamePadHorizontal") != 0) x = Input.GetAxis("GamePadHorizontal") * speedIncrease;
         else x = 0;
         if (Mathf.Abs(x) > 0) animator.SetFloat("Speed", 1);
         else animator.SetFloat("Speed", 0);
-        if (x > 0) mesh.transform.localScale = new Vector3(0.339f, 0.339f, 0.339f);
-        else if (x < 0) mesh.transform.localScale = new Vector3(0.339f, 0.339f, -0.339f);
     }
     private void GroundCheck()
     {
