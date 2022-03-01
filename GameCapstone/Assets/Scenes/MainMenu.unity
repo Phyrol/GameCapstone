@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 9996113}
   - component: {fileID: 9996115}
   - component: {fileID: 9996114}
+  - component: {fileID: 9996116}
   m_Layer: 5
   m_Name: 1280x720
   m_TagString: Untagged
@@ -257,6 +258,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9996112}
   m_CullTransparentMesh: 1
+--- !u!114 &9996116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9996112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114e32199260ea54eb7e71fe9f44bff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Toggle: {fileID: 1643019484}
 --- !u!1001 &43231485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -946,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2233152820097383239, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2233152820097383239, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2341,6 +2355,7 @@ GameObject:
   - component: {fileID: 711452482}
   - component: {fileID: 711452484}
   - component: {fileID: 711452483}
+  - component: {fileID: 711452485}
   m_Layer: 5
   m_Name: 1920x1080
   m_TagString: Untagged
@@ -2464,6 +2479,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711452481}
   m_CullTransparentMesh: 1
+--- !u!114 &711452485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711452481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008c03b8e5248384daa587725a9cd6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Toggle: {fileID: 1643019484}
 --- !u!1 &849419653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3866,6 +3894,7 @@ GameObject:
   - component: {fileID: 1301987520}
   - component: {fileID: 1301987522}
   - component: {fileID: 1301987521}
+  - component: {fileID: 1301987523}
   m_Layer: 5
   m_Name: 854x480
   m_TagString: Untagged
@@ -3989,6 +4018,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301987519}
   m_CullTransparentMesh: 1
+--- !u!114 &1301987523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301987519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a822e9edccb4c2e4b8a099c202e1032b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Toggle: {fileID: 1643019484}
 --- !u!1001 &1302781024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4928,6 +4970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1643019484}
   - component: {fileID: 1643019485}
+  - component: {fileID: 1643019486}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -5001,8 +5044,33 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1643019486}
+        m_TargetAssemblyTypeName: FullScreenToggle, Assembly-CSharp
+        m_MethodName: ToggleFullScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1643019486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643019483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec06aa98d9d250a45b3c5cf92495e488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFullScreen: 0
 --- !u!224 &1686440864 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2233152820097383239, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
@@ -5552,7 +5620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2233152820097383288, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
@@ -5634,7 +5702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2233152820097383239, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2233152820097383239, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5791,7 +5859,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1902663870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 087f8003aafecb046b865cf3c3ffac49, type: 3}
+  m_Script: {fileID: 11500000, guid: 023749670efaa884c92ca78cdc967f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1964933143 stripped
@@ -6335,7 +6403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2233152820097383239, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2233152820097383239, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
       propertyPath: m_AnchorMax.x
