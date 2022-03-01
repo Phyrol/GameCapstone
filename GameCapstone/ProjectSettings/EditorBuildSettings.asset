@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/QuickStartMenu.unity
+    guid: 068a906b7cd3daa41895975090804439
+  - enabled: 1
+    path: Assets/Scenes/TestLevelLayout.unity
+    guid: 06162c0356ebfc64891825b8cee61047
   m_configObjects: {}

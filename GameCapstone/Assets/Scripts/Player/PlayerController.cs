@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 
 public partial class PlayerController : MonoBehaviour
 {
+    PhotonView view;
     #region Variables
 
     #region Movement Mechanics
@@ -96,13 +99,28 @@ public partial class PlayerController : MonoBehaviour
     #endregion
     private void Awake()
     {
-        if (singleton == null)
-            singleton = this;
-        else
-            Destroy(gameObject);
+        view = GetComponent<PhotonView>();
+        //if (singleton == null)
+        //    singleton = this;
+        //else
+        //    Destroy(gameObject);
     }
     void Start()
     {
+        CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+        if(_cameraWork != null)
+        {
+            if(view.IsMine)
+            {
+                _cameraWork.OnStartFollowing();
+            }
+        }
+        else
+        {
+            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+        }
+
         capCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
         //moveCamera = GetComponent<MoveCamera>();
@@ -116,23 +134,29 @@ public partial class PlayerController : MonoBehaviour
 
     void Update()
     {
-        MovementInput();
-        if (jumpMechanic) JumpInput();
+        if(view.IsMine)
+        {
+            MovementInput();
+            if (jumpMechanic) JumpInput();
+        }
     }
 
     private void FixedUpdate()
     {
-        GroundCheck();
-        Move();
-        if (useGravity)
+        if(view.IsMine)
         {
-            if (jumpMechanic) HandleJumpInput();
-            ApplyGravity();
-        }
-        rb.velocity += totalVelocityToAdd;
-        if (rb.velocity.magnitude < baseMovementVariables.minVelocity && x == 0 && isGrounded)        //If the player stops moving set its maxVelocity to walkingSpeed and set its rb velocity to 0
-        {
-            rb.velocity = Vector3.zero;
+            GroundCheck();
+            Move();
+            if (useGravity)
+            {
+                if (jumpMechanic) HandleJumpInput();
+                ApplyGravity();
+            }
+            rb.velocity += totalVelocityToAdd;
+            if (rb.velocity.magnitude < baseMovementVariables.minVelocity && x == 0 && isGrounded)        //If the player stops moving set its maxVelocity to walkingSpeed and set its rb velocity to 0
+            {
+                rb.velocity = Vector3.zero;
+            }
         }
     }
 }
