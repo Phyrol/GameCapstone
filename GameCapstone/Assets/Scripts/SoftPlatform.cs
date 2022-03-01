@@ -3,24 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(BoxCollider))]//for now, not necessary
+[RequireComponent(typeof(BoxCollider))] //for now, not necessary
 public class SoftPlatform : MonoBehaviour
 {
     [SerializeField] private Vector3 entryDirection = Vector3.up;
     [SerializeField] private bool localDirection = false;
-    [SerializeField] private Vector3 triggerScale = Vector3.one * 2.0f;
+    [SerializeField] private Vector3 triggerScale = Vector3.one * 4.0f;
     [SerializeField] bool below;
+
+    [SerializeField] bool down;
+
+    [SerializeField] double timeRemaining = 1;
+    [SerializeField] bool timerIsRunning = false;
+
+    private GameObject player;
+    PlayerController pScript;
+
 
     private new BoxCollider collider = null;
     private BoxCollider collisionCheck = null;
 
     public Vector3 Direction => localDirection ? 
         transform.TransformDirection(entryDirection.normalized) : entryDirection.normalized;
-
+    
     private void Awake()
     {
         collider = GetComponent<BoxCollider>();
-
+        //collider.enabled = true;
         collider.isTrigger = false;
 
         collisionCheck = gameObject.AddComponent<BoxCollider>();
@@ -35,8 +44,59 @@ public class SoftPlatform : MonoBehaviour
         collisionCheck.isTrigger = true;
 
         below = true;
+        down = false;
+
+        player = GameObject.Find("Player");
+        pScript = player.GetComponent<PlayerController>();
+    }
+
+    private void FixedUpdate()
+    {
+        gameObject.SetActive(true);
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            down = true;
+            timerIsRunning = true;
+
+            //pScript.previousState = pScript.playerState;
+            //pScript.playerState = PlayerState.InAir;
+            //pScript.SetInitialGravity();
+
+            //pScript.previousState = pScript.playerState;
+            //pScript.isGrounded = true;
+
+            Debug.Log("pressing down s ");
+        }
+        else if(!timerIsRunning)
+        {
+            down = false;
+            collisionCheck.enabled = true;
+        }
+
+        if (timerIsRunning)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+
+                if(gameObject.transform.position.y > player.transform.position.y)
+                {
+                    timeRemaining = 1;
+                    timerIsRunning = false;
+                }
+            }
+            else
+            {
+                timeRemaining = 1;
+                timerIsRunning = false;
+                collisionCheck.enabled = true;
+            }
+        }
+
 
     }
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -47,14 +107,39 @@ public class SoftPlatform : MonoBehaviour
             other, other.transform.position, other.transform.rotation,
             out Vector3 collisionDirection, out float _);
         below = true;
-        if(below)
+        if (below)
+        {
+            float dot = Vector3.Dot(Direction, collisionDirection);
+            Debug.Log(Direction + " " + collisionDirection);
+            //this vvv makes opposite direction passing not aloowed - which we will have to change 
+            if (dot < 0)
+            {
+                if(!down)
+                { 
+                Physics.IgnoreCollision(collider, other, false);
+                Debug.Log("In Stay (false condition) and we keep collision" + dot);
+                }
+                else
+                {
+                    Physics.IgnoreCollision(collider, other, true);
+                    collisionCheck.enabled = false;
+                    Debug.Log("pressing down on top");
+                }
+            }
+            else
+            {
+                Physics.IgnoreCollision(collider, other, true);
+                Debug.Log("In Stay (true condition) and we ignore collision" + dot);
+            }
+        }
+        else// if (Input.GetKey(KeyCode.S))
         {
             float dot = Vector3.Dot(Direction, collisionDirection);
             //this vvv makes opposite direction passing not aloowed - which we will have to change 
-            if(dot < 0)
+            if (dot > 0)
             {
                 Physics.IgnoreCollision(collider, other, false);
-                Debug.Log("In Stay (false condition) and we keep collision");
+                Debug.Log("In S (false condition) and we keep collision");
                 //below = false;
             }
             else
@@ -63,6 +148,7 @@ public class SoftPlatform : MonoBehaviour
                 Debug.Log("In Stay (true condition) and we ignore collision");
             }
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)
