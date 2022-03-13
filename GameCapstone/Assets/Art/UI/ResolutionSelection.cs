@@ -41,7 +41,7 @@ public class ResolutionSelection : MonoBehaviour
         resList[index].SetActive(true);
     }
 
-        public void ToggleRight()
+    public void ToggleRight()
     {
         // hide current character model
         resList[index].SetActive(false);
