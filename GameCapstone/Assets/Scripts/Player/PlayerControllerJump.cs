@@ -7,6 +7,7 @@ public enum PlayerState
     NotMoving,
     Grounded,
     Jumping,
+    Dodging,
     InAir,
 };
 public partial class PlayerController
@@ -25,7 +26,7 @@ public partial class PlayerController
         public float justJumpedCooldown = .1f;
         public float coyoteTime = 0.15f;
 
-        public int inAirJumps = 0;
+        public int inAirJumps = 1;
     }
     public void JumpInput()
     {
@@ -38,16 +39,22 @@ public partial class PlayerController
     public void HandleJumpInput()
     {
         if (_jumpBuffer <= 0) _jumpBuffer = 0;
-        if (_jumpBuffer > 0 && (isGrounded || _coyoteTimer > 0) && playerState != PlayerState.Jumping) StartCoroutine(JumpCoroutine());
-        else if (playerState == PlayerState.InAir && _inAirJumps > 0 && _jumpBuffer > 0)
+        if(playerState != PlayerState.Dodging)
         {
-            _inAirJumps--;
-            StartCoroutine(JumpCoroutine());
+            if (_jumpBuffer > 0 && (isGrounded || _coyoteTimer > 0) && playerState != PlayerState.Jumping) StartCoroutine(JumpCoroutine());
+            else if (playerState == PlayerState.InAir && _inAirJumps > 0 && _jumpBuffer > 0)
+            {
+                _inAirJumps--;
+                StartCoroutine(JumpCoroutine());
+            }
         }
+        
         if (_jumpBuffer > 0) _jumpBuffer -= Time.fixedDeltaTime;
     }
     private IEnumerator JumpCoroutine()
     {
+        SetAnimBool("isJumping", true);
+
         SetVariablesOnJump();
         previousState = playerState;
         playerState = PlayerState.Jumping;
@@ -71,6 +78,9 @@ public partial class PlayerController
             g = baseMovementVariables.initialGravity;
         }
         airControl = baseMovementVariables.inAirControl;
+
+        SetAnimBool("isJumping", false);
+
         previousState = playerState;
         if (!isGrounded) playerState = PlayerState.InAir;
     }

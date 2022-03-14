@@ -81,8 +81,8 @@ public partial class PlayerController
         }
         //else if (Input.GetAxis("GamePadHorizontal") != 0) x = Input.GetAxis("GamePadHorizontal") * speedIncrease;
         else x = 0;
-        if (Mathf.Abs(x) > 0) animator.SetFloat("Speed", 1);
-        else animator.SetFloat("Speed", 0);
+        if (Mathf.Abs(x) > 0) SetAnimFloat("Speed", 1);
+        else SetAnimFloat("Speed", 0);
     }
     private void GroundCheck()
     {
@@ -91,7 +91,12 @@ public partial class PlayerController
             if (_coyoteTimer > 0) _coyoteTimer -= Time.fixedDeltaTime;
             if (jumpVariables.justJumpedCooldown > 0) _justJumpedCooldown -= Time.fixedDeltaTime;
         }
-        groundCheck = (!jumpMechanic || _justJumpedCooldown <= 0) ? Physics.SphereCast(transform.position, capCollider.radius, -transform.up, out hit, baseMovementVariables.groundCheckDistance + 0.01f, ~triggers) : false;
+        if(dodgeMechanic)
+        {
+            if (_justDodgedCooldown <= 0) Debug.Log("can dodge");
+            if (dodgeVariables.justDodgedCooldown > 0) _justDodgedCooldown -= Time.fixedDeltaTime;
+        }
+        groundCheck = (!jumpMechanic || _justJumpedCooldown <= 0 || _justDodgedCooldown <= 0) ? Physics.SphereCast(transform.position, capCollider.radius, -transform.up, out hit, baseMovementVariables.groundCheckDistance + 0.01f, ~triggers) : false;
         surfaceSlope = Vector3.Angle(hit.normal, Vector3.up);
         if (surfaceSlope > baseMovementVariables.maxSlope)
         {
@@ -129,6 +134,7 @@ public partial class PlayerController
                 rb.velocity = (groundedRight * x + groundedForward).normalized * rb.velocity.magnitude;          //This is to prevent the weird glitch where the player bounces on slopes if they land on them without jumping
             friction = baseMovementVariables.groundFriction;
             _inAirJumps = jumpVariables.inAirJumps;
+            _inAirDodges = dodgeVariables.inAirDodges;
             previousState = playerState;
             playerState = PlayerState.Grounded;
             if (playerJustLanded != null) playerJustLanded();

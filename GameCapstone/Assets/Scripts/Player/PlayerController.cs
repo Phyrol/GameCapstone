@@ -12,11 +12,13 @@ public partial class PlayerController : MonoBehaviour
     #region Movement Mechanics
     [Header("Additional Mechanics")]
     public bool jumpMechanic;
+    public bool dodgeMechanic;
     #endregion
 
     #region Additional Mechanics Variables
     public BaseMovementVariables baseMovementVariables = new BaseMovementVariables();
     public JumpVariables jumpVariables = new JumpVariables();
+    public DodgeVariables dodgeVariables = new DodgeVariables();
     #endregion
 
     #region Player States
@@ -51,6 +53,12 @@ public partial class PlayerController : MonoBehaviour
     private float _justJumpedCooldown;
     private float _coyoteTimer;
     public int _inAirJumps;
+    #endregion
+
+    #region Dodge
+    private float _dodgeBuffer;
+    private float _justDodgedCooldown;
+    public int _inAirDodges;
     #endregion
 
     #region InAirVariables
@@ -138,6 +146,7 @@ public partial class PlayerController : MonoBehaviour
         {
             MovementInput();
             if (jumpMechanic) JumpInput();
+            if (dodgeMechanic) DodgeInput();
         }
     }
 
@@ -146,7 +155,8 @@ public partial class PlayerController : MonoBehaviour
         if(view.IsMine)
         {
             GroundCheck();
-            Move();
+            if (playerState != PlayerState.Dodging) Move();
+            if (dodgeMechanic) HandleDodgeInput();
             if (useGravity)
             {
                 if (jumpMechanic) HandleJumpInput();
@@ -159,4 +169,8 @@ public partial class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void SetAnimBool(string valName, bool val) => animator.SetBool(valName, val);
+
+    private void SetAnimFloat(string valName, float val) => animator.SetFloat(valName, val);
 }
