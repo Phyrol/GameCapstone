@@ -27,8 +27,9 @@ public partial class PlayerController
 
         #region Velocity Caps
         [Header("Velocity Boundaries")]
-        public float maxWalkVelocity = 7.5f;
+        public float maxWalkVelocity = 20f;
         public float maxSprintVelocity = 15;
+        public float maxInAirVelocity = 15f;
         public float minVelocity = .1f;
         #endregion
 
@@ -81,8 +82,8 @@ public partial class PlayerController
         }
         //else if (Input.GetAxis("GamePadHorizontal") != 0) x = Input.GetAxis("GamePadHorizontal") * speedIncrease;
         else x = 0;
-        if (Mathf.Abs(x) > 0) animator.SetFloat("Speed", 1);
-        else animator.SetFloat("Speed", 0);
+        if (Mathf.Abs(x) > 0) SetAnimFloat("Speed", 1);
+        else SetAnimFloat("Speed", 0);
     }
     private void GroundCheck()
     {
@@ -91,7 +92,12 @@ public partial class PlayerController
             if (_coyoteTimer > 0) _coyoteTimer -= Time.fixedDeltaTime;
             if (jumpVariables.justJumpedCooldown > 0) _justJumpedCooldown -= Time.fixedDeltaTime;
         }
-        groundCheck = (!jumpMechanic || _justJumpedCooldown <= 0) ? Physics.SphereCast(transform.position, capCollider.radius, -transform.up, out hit, baseMovementVariables.groundCheckDistance + 0.01f, ~triggers) : false;
+        if(dodgeMechanic)
+        {
+            if (_justDodgedCooldown <= 0) Debug.Log("can dodge");
+            if (dodgeVariables.justDodgedCooldown > 0) _justDodgedCooldown -= Time.fixedDeltaTime;
+        }
+        groundCheck = (!jumpMechanic || _justJumpedCooldown <= 0 || _justDodgedCooldown <= 0) ? Physics.SphereCast(transform.position, capCollider.radius, -transform.up, out hit, baseMovementVariables.groundCheckDistance + 0.01f, ~triggers) : false;
         surfaceSlope = Vector3.Angle(hit.normal, Vector3.up);
         if (surfaceSlope > baseMovementVariables.maxSlope)
         {
@@ -129,6 +135,7 @@ public partial class PlayerController
                 rb.velocity = (groundedRight * x + groundedForward).normalized * rb.velocity.magnitude;          //This is to prevent the weird glitch where the player bounces on slopes if they land on them without jumping
             friction = baseMovementVariables.groundFriction;
             _inAirJumps = jumpVariables.inAirJumps;
+            _inAirDodges = dodgeVariables.inAirDodges;
             previousState = playerState;
             playerState = PlayerState.Grounded;
             if (playerJustLanded != null) playerJustLanded();
@@ -171,12 +178,20 @@ public partial class PlayerController
 
         if (!isGrounded)
         {
-            rb.velocity -= currentRight * friction;
-
-            newRight = transform.right * x;
+            newRight = transform.right.normalized * x;
             if (x != 0)
             {
-                rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
+                if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity)
+                {
+                    totalVelocityToAdd.x += newRight.x;
+                }
+                else
+                {
+                    //if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity + 1f) rb.velocity = newRight.normalized * baseMovementVariables.maxInAirVelocity;
+                }
+
+                //rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
+
             }
         }
         else
@@ -200,7 +215,12 @@ public partial class PlayerController
                 totalVelocityToAdd = Vector3.zero;
             }
 
-            if (rb.velocity.magnitude != maxVelocity || x == 0)
+            if(x == 0)
+            {
+                currentRight.x = 0;
+                rb.velocity = currentRight;
+            }
+            else if (rb.velocity.magnitude != maxVelocity)
             {
                 totalVelocityToAdd -= rb.velocity * friction;
             }
