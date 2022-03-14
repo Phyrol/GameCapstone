@@ -835,6 +835,7 @@ MonoBehaviour:
     sprintSpeedIncrease: 2
     maxWalkVelocity: 100
     maxSprintVelocity: 15
+    maxInAirVelocity: 5
     minVelocity: 0.1
     groundFriction: 0.1
     inAirFriction: 0.1

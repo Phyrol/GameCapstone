@@ -49,7 +49,7 @@ public partial class PlayerController
         rb.velocity = x == 0 ? transform.right * dodgeVariables.dodgeStrength : currentRight.normalized * dodgeVariables.dodgeStrength;
 
         // when animation ends, give control back to player
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         SetAnimBool("isDodging", false);
         currentRight.x = 0;

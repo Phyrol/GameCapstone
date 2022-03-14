@@ -27,8 +27,9 @@ public partial class PlayerController
 
         #region Velocity Caps
         [Header("Velocity Boundaries")]
-        public float maxWalkVelocity = 7.5f;
+        public float maxWalkVelocity = 20f;
         public float maxSprintVelocity = 15;
+        public float maxInAirVelocity = 15f;
         public float minVelocity = .1f;
         #endregion
 
@@ -177,12 +178,20 @@ public partial class PlayerController
 
         if (!isGrounded)
         {
-            rb.velocity -= currentRight * friction;
-
-            newRight = transform.right * x;
+            newRight = transform.right.normalized * x;
             if (x != 0)
             {
-                rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
+                if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity)
+                {
+                    totalVelocityToAdd.x += newRight.x;
+                }
+                else
+                {
+                    //if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity + 1f) rb.velocity = newRight.normalized * baseMovementVariables.maxInAirVelocity;
+                }
+
+                //rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
+
             }
         }
         else
@@ -206,7 +215,12 @@ public partial class PlayerController
                 totalVelocityToAdd = Vector3.zero;
             }
 
-            if (rb.velocity.magnitude != maxVelocity || x == 0)
+            if(x == 0)
+            {
+                currentRight.x = 0;
+                rb.velocity = currentRight;
+            }
+            else if (rb.velocity.magnitude != maxVelocity)
             {
                 totalVelocityToAdd -= rb.velocity * friction;
             }
