@@ -53,7 +53,10 @@ public partial class PlayerController
     }
     private IEnumerator JumpCoroutine()
     {
-        SetAnimBool("isJumping", true);
+        //SetAnimBool("IsJumping1", true);
+
+        Debug.Log("JUMPING");
+        SetAnimTrigger("IsJumping2");
 
         SetVariablesOnJump();
         previousState = playerState;
@@ -78,8 +81,7 @@ public partial class PlayerController
             g = baseMovementVariables.initialGravity;
         }
         airControl = baseMovementVariables.inAirControl;
-
-        SetAnimBool("isJumping", false);
+        //SetAnimBool("IsJumping1", false);
 
         previousState = playerState;
         if (!isGrounded) playerState = PlayerState.InAir;

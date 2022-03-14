@@ -172,5 +172,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void SetAnimBool(string valName, bool val) => animator.SetBool(valName, val);
 
-    private void SetAnimFloat(string valName, float val) => animator.SetFloat(valName, val);
+    private void SetAnimTrigger(string valName) => animator.SetTrigger(valName);
+
+    private void SetAnimFloat(string valName, float val) => animator.SetFloat(valName, val, 0.1f, Time.deltaTime);
 }
