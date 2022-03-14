@@ -827,6 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpMechanic: 1
+  dodgeMechanic: 1
   baseMovementVariables:
     maxSlope: 60
     groundCheckDistance: 0
@@ -856,12 +857,18 @@ MonoBehaviour:
     justJumpedCooldown: 0.1
     coyoteTime: 0.15
     inAirJumps: 1
+  dodgeVariables:
+    dodgeBuffer: 0.3
+    dodgeStrength: 13
+    justDodgedCooldown: 0.1
+    inAirDodges: 1
   isGrounded: 0
   onFakeGround: 0
   playerState: 0
   previousState: 0
   useGravity: 1
   _inAirJumps: 0
+  _inAirDodges: 0
   triggers:
     serializedVersion: 2
     m_Bits: 0
