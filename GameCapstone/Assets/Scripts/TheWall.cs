@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class TheWall : MonoBehaviour
 {
@@ -52,17 +53,39 @@ public class TheWall : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         //check for player tag
-        if(other.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player is dead!!!");
             //player id dead
             //Text text = notif.GetComponent<Text>();
             //text.enabled = true;
 
-            Destroy(other);
+            other.gameObject.GetComponent<PhotonView>().RPC("Dead", RpcTarget.Others, new object[] { });
+        }
+        else
+        {
+            Debug.Log("Not Player");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //check for player tag
+        if(other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player is dead!!!");
+            //player id dead
+            //Text text = notif.GetComponent<Text>();
+            //text.enabled = true;
+
+            other.gameObject.GetComponent<PhotonView>().RPC("Dead", RpcTarget.Others, new object[] { });
+        }
+        else
+        {
+            Debug.Log("Not Player");
         }
     }
 

@@ -875,6 +875,10 @@ MonoBehaviour:
     dodgeStrength: 13
     justDodgedCooldown: 0.1
     inAirDodges: 1
+  platformVariables:
+    timeRemaining: 1
+    timerIsRunning: 0
+    down: 0
   isGrounded: 0
   onFakeGround: 0
   playerState: 0

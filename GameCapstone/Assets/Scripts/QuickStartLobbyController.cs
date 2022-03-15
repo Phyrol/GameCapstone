@@ -24,7 +24,7 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     public void QuickStart() // paired to quickstart button
     {
         quickStartButton.SetActive(false);
-        quickCancelButton.SetActive(true);
+        //quickCancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom(); // first tries to join an existing room
         Debug.Log("Quick start");
     }
@@ -54,7 +54,7 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 
     public void QuickCancel()
     {
-        quickCancelButton.SetActive(false);
+        //quickCancelButton.SetActive(false);
         quickStartButton.SetActive(true);
         PhotonNetwork.LeaveRoom();
     }
