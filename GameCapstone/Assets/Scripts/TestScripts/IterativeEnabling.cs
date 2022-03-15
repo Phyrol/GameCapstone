@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class IterativeEnabling : MonoBehaviour
 {
@@ -27,10 +28,17 @@ public class IterativeEnabling : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isRight)
-            other.GetComponent<Collider>().attachedRigidbody.AddForce(10, 5, 0, ForceMode.Impulse);
-        else
-            other.GetComponent<Collider>().attachedRigidbody.AddForce(-10, 5, 0, ForceMode.Impulse);
-        col.enabled = false;
+        if(other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("DAMAGING");
+            other.gameObject.GetComponent<PhotonView>().RPC("Damage", RpcTarget.Others, new object[] { new Vector3(transform.parent.transform.right.x * 10, 5, 0) });
+        }
+        //other.GetComponent<Collider>().attachedRigidbody.AddForce(transform.parent.transform.right.x * 10, 5, 0, ForceMode.Impulse);
+
+        //if(isRight)
+        //    other.GetComponent<Collider>().attachedRigidbody.AddForce(10, 5, 0, ForceMode.Impulse);
+        //else
+        //    other.GetComponent<Collider>().attachedRigidbody.AddForce(-10, 5, 0, ForceMode.Impulse);
+        //col.enabled = false;
     }
 }

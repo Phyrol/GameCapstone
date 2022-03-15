@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6298229762026114261}
   - component: {fileID: 6298229762026114258}
   - component: {fileID: 6298229762026114259}
-  - component: {fileID: 6298229762026114263}
+  - component: {fileID: 5318097059229347661}
   m_Layer: 0
   m_Name: Collision
   m_TagString: Untagged
@@ -96,7 +96,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6298229762026114263
+--- !u!114 &5318097059229347661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,6 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6298229762026114256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 834681ba886bb3647b06d654b5dca565, type: 3}
+  m_Script: {fileID: 11500000, guid: 08c4e74eb1fc5804282e4503e7747c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
