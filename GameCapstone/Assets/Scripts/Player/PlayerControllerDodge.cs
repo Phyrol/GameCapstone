@@ -41,7 +41,10 @@ public partial class PlayerController
     private IEnumerator DodgeCoroutine()
     {
         Debug.Log("DODGING");
-        SetAnimBool("isDodging", true);
+
+        //SetAnimBool("isDodging1", true);
+        SetAnimTrigger("isDodging2");
+
         SetVariablesOnDodge();
         previousState = playerState;
         playerState = PlayerState.Dodging;
@@ -51,7 +54,7 @@ public partial class PlayerController
         // when animation ends, give control back to player
         yield return new WaitForSeconds(1f);
 
-        SetAnimBool("isDodging", false);
+        //SetAnimBool("isDodging1", false);
         currentRight.x = 0;
 
         previousState = playerState;
