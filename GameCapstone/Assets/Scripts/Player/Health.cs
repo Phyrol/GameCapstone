@@ -23,4 +23,11 @@ public class Health : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
         Debug.Log($"DAMAGED: {direction}");
     }
+
+    [PunRPC]
+    void Dead()
+    {
+        PhotonNetwork.Destroy(gameObject);
+        Debug.Log("I AM DEAD");
+    }
 }
