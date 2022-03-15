@@ -19,6 +19,9 @@ public partial class PlayerController : MonoBehaviour
     public BaseMovementVariables baseMovementVariables = new BaseMovementVariables();
     public JumpVariables jumpVariables = new JumpVariables();
     public DodgeVariables dodgeVariables = new DodgeVariables();
+
+    public SoftPlatformVariables platformVariables = new SoftPlatformVariables();
+
     #endregion
 
     #region Player States

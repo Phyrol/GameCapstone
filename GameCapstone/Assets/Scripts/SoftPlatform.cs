@@ -10,7 +10,6 @@ public class SoftPlatform : MonoBehaviour
     [SerializeField] private bool localDirection = false;
     [SerializeField] private Vector3 triggerScale = Vector3.one * 4.0f;
     [SerializeField] bool below;
-
     [SerializeField] bool down;
 
     [SerializeField] double timeRemaining = 1;
@@ -18,7 +17,6 @@ public class SoftPlatform : MonoBehaviour
 
     private GameObject player;
     PlayerController pScript;
-
 
     private new BoxCollider collider = null;
     private BoxCollider collisionCheck = null;
@@ -46,10 +44,11 @@ public class SoftPlatform : MonoBehaviour
         below = true;
         down = false;
 
-        player = GameObject.Find("Player");
-        pScript = player.GetComponent<PlayerController>();
+        //player = GameObject.Find("Player");
+        //pScript = player.GetComponent<PlayerController>();
     }
 
+    /*
     private void FixedUpdate()
     {
         gameObject.SetActive(true);
@@ -58,13 +57,6 @@ public class SoftPlatform : MonoBehaviour
         {
             down = true;
             timerIsRunning = true;
-
-            //pScript.previousState = pScript.playerState;
-            //pScript.playerState = PlayerState.InAir;
-            //pScript.SetInitialGravity();
-
-            //pScript.previousState = pScript.playerState;
-            //pScript.isGrounded = true;
 
             Debug.Log("pressing down s ");
         }
@@ -95,11 +87,14 @@ public class SoftPlatform : MonoBehaviour
         }
 
 
-    }
+    }*/
 
 
     private void OnTriggerStay(Collider other)
     {
+
+
+   
         Physics.IgnoreCollision(collider, other, true);
 
         below = Physics.ComputePenetration(
@@ -132,7 +127,7 @@ public class SoftPlatform : MonoBehaviour
                 Debug.Log("In Stay (true condition) and we ignore collision" + dot);
             }
         }
-        else// if (Input.GetKey(KeyCode.S))
+        else// if above
         {
             float dot = Vector3.Dot(Direction, collisionDirection);
             //this vvv makes opposite direction passing not aloowed - which we will have to change 
