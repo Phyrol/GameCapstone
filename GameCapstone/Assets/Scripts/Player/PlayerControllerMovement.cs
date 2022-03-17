@@ -179,20 +179,17 @@ public partial class PlayerController
         if (!isGrounded)
         {
             newRight = transform.right.normalized * x;
-            if (x != 0)
+
+            if (Mathf.Abs(rb.velocity.x) < baseMovementVariables.maxInAirVelocity)
             {
-                if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity)
-                {
-                    totalVelocityToAdd.x += newRight.x;
-                }
-                else
-                {
-                    //if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity + 1f) rb.velocity = newRight.normalized * baseMovementVariables.maxInAirVelocity;
-                }
-
-                //rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
-
+                totalVelocityToAdd.x += newRight.x;
             }
+            else
+            {
+                rb.velocity = new Vector3((transform.right.normalized * baseMovementVariables.maxInAirVelocity).x, rb.velocity.y, rb.velocity.z);
+            }
+
+            //rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
         }
         else
         {
