@@ -847,11 +847,11 @@ MonoBehaviour:
     sprintSpeedIncrease: 2
     maxWalkVelocity: 100
     maxSprintVelocity: 15
-    maxInAirVelocity: 5
+    maxInAirVelocity: 10
     minVelocity: 0.1
     groundFriction: 0.1
     inAirFriction: 0.1
-    inAirControl: 0.893
+    inAirControl: 1
     initialGravity: -0.55
     gravityRate: 1.008
     maxGravity: -39.2
@@ -862,10 +862,10 @@ MonoBehaviour:
   jumpVariables:
     scrollWheelDelta: 0
     jumpBuffer: 0.3
-    jumpStrength: 14.51
-    jumpStregthDecreaser: 0.05
+    jumpStrength: 18
+    jumpStregthDecreaser: 2
     jumpInAirStrength: 0
-    jumpInAirControl: 0.7
+    jumpInAirControl: 1
     jumpingInitialGravity: -0.3
     justJumpedCooldown: 0.1
     coyoteTime: 0.15

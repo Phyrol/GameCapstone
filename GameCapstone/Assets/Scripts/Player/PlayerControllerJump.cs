@@ -70,10 +70,15 @@ public partial class PlayerController
 
         while (rb.velocity.y >= 0f && playerState != PlayerState.Grounded)
         {
-            y -= jumpVariables.jumpStregthDecreaser;
             totalVelocityToAdd += Vector3.up * y;
+
+            g = baseMovementVariables.initialGravity * jumpVariables.jumpStregthDecreaser;
+            y -= jumpVariables.jumpStregthDecreaser;
+            
             yield return fixedUpdate;
         }
+        g = baseMovementVariables.initialGravity;
+
         if (playerState != PlayerState.Grounded)
         {
             g = 0;

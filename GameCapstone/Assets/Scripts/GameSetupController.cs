@@ -20,11 +20,11 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             i++;
         }
 
-        if(PhotonNetwork.IsMasterClient)
-        {
-            GameObject wall = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "WALL"), Vector3.zero, Quaternion.identity);
-            DontDestroyOnLoad(wall);
-        }
+        //if(PhotonNetwork.IsMasterClient)
+        //{
+        //    GameObject wall = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "WALL"), Vector3.zero, Quaternion.identity);
+        //    DontDestroyOnLoad(wall);
+        //}
 
         CreatePlayer(); // create a networked player object for each player that loads into the mulplayer room
     }
