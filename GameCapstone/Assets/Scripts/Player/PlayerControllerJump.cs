@@ -56,7 +56,7 @@ public partial class PlayerController
         //SetAnimBool("IsJumping1", true);
 
         Debug.Log("JUMPING");
-        //SetAnimTrigger("IsJumping2");
+        SetAnimTrigger("IsJumping2");
 
         SetVariablesOnJump();
         previousState = playerState;
