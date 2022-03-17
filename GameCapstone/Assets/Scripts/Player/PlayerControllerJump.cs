@@ -56,7 +56,7 @@ public partial class PlayerController
         //SetAnimBool("IsJumping1", true);
 
         Debug.Log("JUMPING");
-        SetAnimTrigger("IsJumping2");
+        //SetAnimTrigger("IsJumping2");
 
         SetVariablesOnJump();
         previousState = playerState;
@@ -70,10 +70,15 @@ public partial class PlayerController
 
         while (rb.velocity.y >= 0f && playerState != PlayerState.Grounded)
         {
-            y -= jumpVariables.jumpStregthDecreaser;
             totalVelocityToAdd += Vector3.up * y;
+
+            g = baseMovementVariables.initialGravity * jumpVariables.jumpStregthDecreaser;
+            y -= jumpVariables.jumpStregthDecreaser;
+            
             yield return fixedUpdate;
         }
+        g = baseMovementVariables.initialGravity;
+
         if (playerState != PlayerState.Grounded)
         {
             g = 0;

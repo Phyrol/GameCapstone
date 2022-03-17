@@ -862,8 +862,8 @@ MonoBehaviour:
   jumpVariables:
     scrollWheelDelta: 0
     jumpBuffer: 0.3
-    jumpStrength: 10
-    jumpStregthDecreaser: 0.05
+    jumpStrength: 18
+    jumpStregthDecreaser: 2
     jumpInAirStrength: 0
     jumpInAirControl: 1
     jumpingInitialGravity: -0.3
