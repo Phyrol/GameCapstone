@@ -43,6 +43,7 @@ public partial class PlayerController
         Debug.Log("DODGING");
 
         //SetAnimBool("isDodging1", true);
+        FindObjectOfType<AudioManager>().Play("Dodge");
         SetAnimTrigger("isDodging2");
 
         SetVariablesOnDodge();

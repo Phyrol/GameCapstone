@@ -6,6 +6,8 @@ public partial class PlayerController
 {
     public Animator animator;
     public GameObject mesh;
+    public ParticleSystem dirtparticles;
+
     bool rotatedLeft = false;
     bool rotatedRight = true;
     [System.Serializable]
@@ -138,7 +140,12 @@ public partial class PlayerController
             _inAirDodges = dodgeVariables.inAirDodges;
             previousState = playerState;
             playerState = PlayerState.Grounded;
+
+            dirtparticles.Clear();
+            dirtparticles.Play();
+
             if (playerJustLanded != null) playerJustLanded();
+
             g = 0;
         }
         //Player just left the ground
@@ -179,26 +186,20 @@ public partial class PlayerController
         if (!isGrounded)
         {
             newRight = transform.right.normalized * x;
-
-            if (Mathf.Abs(rb.velocity.x) < baseMovementVariables.maxInAirVelocity)
+            if (x != 0)
             {
-                totalVelocityToAdd.x += newRight.x;
-            }
-            else
-            {
-                //rb.velocity = new Vector3((transform.right.normalized * baseMovementVariables.maxInAirVelocity).x, rb.velocity.y, rb.velocity.z);
-                if (x == 0 || (pvX < 0 && x > 0)
-                    || (x < 0 && pvX > 0)) rb.velocity = new Vector3(rb.velocity.x * .99f, rb.velocity.y, rb.velocity.z); //If the palyer changes direction when going at the maxSpeed then decrease speed for smoother momentum shift
-                else if (Mathf.Abs(rb.velocity.x) < baseMovementVariables.maxInAirVelocity + 1f) rb.velocity = new Vector3((transform.right.normalized * baseMovementVariables.maxInAirVelocity).x, rb.velocity.y, rb.velocity.z);
-                totalVelocityToAdd = Vector3.zero;
-            }
+                if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity)
+                {
+                    totalVelocityToAdd.x += newRight.x;
+                }
+                else
+                {
+                    //if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity + 1f) rb.velocity = newRight.normalized * baseMovementVariables.maxInAirVelocity;
+                }
 
-            if(x != 0 && rb.velocity.x != baseMovementVariables.maxInAirVelocity)
-            {
-                totalVelocityToAdd.x -= rb.velocity.x * friction;
-            }
+                //rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
 
-            //rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
+            }
         }
         else
         {
