@@ -18,6 +18,11 @@ public class IterativeEnabling : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            Debug.Log("COLLISION ENABLED");
+            FindObjectOfType<AudioManager>().Play("Punch");
+            gameObject.transform.parent.GetComponentInChildren<Animator>().SetTrigger("isPunching");
+
+            // play punch animation
             col.enabled = !col.enabled;
         }
         if (Input.GetKey(KeyCode.D))

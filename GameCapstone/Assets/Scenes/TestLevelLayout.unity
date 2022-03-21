@@ -7497,6 +7497,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4e3bd17bb302bf4e8631254c228c22a, type: 3}
   m_PrefabInstance: {fileID: 1369209544}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1372446730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1372446731}
+  - component: {fileID: 1372446732}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1372446731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372446730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.600481, y: 41.089928, z: 0.88938653}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1372446732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372446730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496e93c1800d1634aa020fc773347be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Punch
+    clip: {fileID: 8300000, guid: 6ca0f9d1a7be7464a9791a615884efae, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
+  - name: Damage
+    clip: {fileID: 8300000, guid: f0c2b7e9bb842d14498f86f27a22d3d5, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
+  - name: Dodge
+    clip: {fileID: 8300000, guid: 8e1b95067c82ccc45b3de29bcf0b676b, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
+  - name: Death
+    clip: {fileID: 8300000, guid: c6be4ac3eb8f4614f85de16a9ea33dca, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
+  - name: Theme
+    clip: {fileID: 8300000, guid: 5d90a9afd418b1b468087481d30da930, type: 3}
+    loop: 1
+    volume: 0.335
+    source: {fileID: 0}
 --- !u!1 &1388059356
 GameObject:
   m_ObjectHideFlags: 0
