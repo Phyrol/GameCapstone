@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 {
 
     public ParticleSystem bloodspray;
+    public float StartingPercent = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +29,9 @@ public class Health : MonoBehaviour
         bloodspray.Clear();
         bloodspray.Play();
 
-        GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
-        Debug.Log($"DAMAGED: {direction}");
+        GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent/100.0f), ForceMode.Impulse);
+        Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
+        StartingPercent += 5.0f;
     }
 
     [PunRPC]

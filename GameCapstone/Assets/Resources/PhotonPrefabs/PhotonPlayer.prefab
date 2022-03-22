@@ -1004,6 +1004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodspray: {fileID: 8256914905318151350}
+  StartingPercent: 0
 --- !u!1 &4022788098844972930
 GameObject:
   m_ObjectHideFlags: 0
