@@ -44,6 +44,9 @@ public partial class PlayerController
 
         //SetAnimBool("isDodging1", true);
         FindObjectOfType<AudioManager>().Play("Dodge");
+
+        // trail on
+        GetComponentInChildren<TrailRenderer>().emitting = true;
         SetAnimTrigger("isDodging2");
 
         SetVariablesOnDodge();
@@ -55,7 +58,8 @@ public partial class PlayerController
         // when animation ends, give control back to player
         yield return new WaitForSeconds(1f);
 
-        //SetAnimBool("isDodging1", false);
+        // trail off
+        GetComponentInChildren<TrailRenderer>().emitting = false;
         currentRight.x = 0;
 
         previousState = playerState;

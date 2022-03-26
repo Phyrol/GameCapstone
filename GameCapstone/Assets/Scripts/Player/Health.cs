@@ -26,8 +26,11 @@ public class Health : MonoBehaviour
     {
         GetComponentInChildren<Animator>().SetTrigger("isPunched");
         FindObjectOfType<AudioManager>().Play("Damage");
+        
         bloodspray.Clear();
         bloodspray.Play();
+
+        StartCoroutine(EmitTrail());
 
         GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent/100.0f), ForceMode.Impulse);
         Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
@@ -42,5 +45,13 @@ public class Health : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Death");
         PhotonNetwork.Destroy(gameObject);
         Debug.Log("I AM DEAD");
+    }
+
+    IEnumerator EmitTrail()
+    {
+        TrailRenderer trail = GetComponentInChildren<TrailRenderer>();
+        trail.emitting = true;
+        yield return new WaitForSeconds(2f);
+        trail.emitting = false;
     }
 }

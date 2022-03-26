@@ -57,6 +57,8 @@ public partial class PlayerController
 
         Debug.Log("JUMPING");
         SetAnimTrigger("IsJumping2");
+        // trail on
+        GetComponentInChildren<TrailRenderer>().emitting = true;
 
         SetVariablesOnJump();
         previousState = playerState;
@@ -86,7 +88,8 @@ public partial class PlayerController
             g = baseMovementVariables.initialGravity;
         }
         airControl = baseMovementVariables.inAirControl;
-        //SetAnimBool("IsJumping1", false);
+        // trail off
+        GetComponentInChildren<TrailRenderer>().emitting = false;
 
         previousState = playerState;
         if (!isGrounded) playerState = PlayerState.InAir;
