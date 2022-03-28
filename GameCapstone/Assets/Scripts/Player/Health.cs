@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 {
 
     public ParticleSystem bloodspray;
+    public float StartingPercent = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +26,15 @@ public class Health : MonoBehaviour
     {
         GetComponentInChildren<Animator>().SetTrigger("isPunched");
         FindObjectOfType<AudioManager>().Play("Damage");
+        
         bloodspray.Clear();
         bloodspray.Play();
 
-        GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
-        Debug.Log($"DAMAGED: {direction}");
+        StartCoroutine(EmitTrail());
+
+        GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent/100.0f), ForceMode.Impulse);
+        Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
+        StartingPercent += 5.0f;
     }
 
     [PunRPC]
@@ -40,5 +45,13 @@ public class Health : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Death");
         PhotonNetwork.Destroy(gameObject);
         Debug.Log("I AM DEAD");
+    }
+
+    IEnumerator EmitTrail()
+    {
+        TrailRenderer trail = GetComponentInChildren<TrailRenderer>();
+        trail.emitting = true;
+        yield return new WaitForSeconds(2f);
+        trail.emitting = false;
     }
 }
