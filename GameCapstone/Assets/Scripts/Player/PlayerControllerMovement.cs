@@ -188,13 +188,13 @@ public partial class PlayerController
             newRight = transform.right.normalized * x;
             if (x != 0)
             {
-                if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity)
+                if (Mathf.Abs(rb.velocity.x) < baseMovementVariables.maxInAirVelocity)
                 {
                     totalVelocityToAdd.x += newRight.x;
                 }
                 else
                 {
-                    //if (rb.velocity.magnitude < baseMovementVariables.maxInAirVelocity + 1f) rb.velocity = newRight.normalized * baseMovementVariables.maxInAirVelocity;
+                    rb.velocity = new Vector3((transform.right.normalized * baseMovementVariables.maxInAirVelocity).x, rb.velocity.y, rb.velocity.z);
                 }
 
                 //rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
@@ -222,7 +222,7 @@ public partial class PlayerController
                 totalVelocityToAdd = Vector3.zero;
             }
 
-            if(x == 0)
+            if (x == 0)
             {
                 currentRight.x = 0;
                 rb.velocity = currentRight;
