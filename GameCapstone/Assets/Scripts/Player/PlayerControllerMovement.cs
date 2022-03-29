@@ -66,6 +66,7 @@ public partial class PlayerController
 
         public void StartVariables(CapsuleCollider capCollider) => groundCheckDistance = capCollider.height * .5f - capCollider.radius;
     }
+
     private void MovementInput()
     {
 
@@ -198,7 +199,6 @@ public partial class PlayerController
                 }
 
                 //rb.velocity = newRight.normalized * currentRight.magnitude * airControl + currentRight * (1f - airControl) + rb.velocity.y * Vector3.up;
-
             }
         }
         else
@@ -281,5 +281,8 @@ public partial class PlayerController
         g = 0;
         transform.position = lastViablePosition;
     }
+
+    public LayerMask layer;
+
     public void UpdateRespawnPoint() => lastViablePosition = transform.position;
 }
