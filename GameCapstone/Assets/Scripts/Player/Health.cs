@@ -63,7 +63,9 @@ public class Health : MonoBehaviour
     IEnumerator KnockbackStun()
     {
         MovementDisabled = true;
+        GetComponent<Collider>().material.bounciness = 1;
         yield return new WaitForSeconds(StartingPercent/60.0f);
         MovementDisabled = false;
+        GetComponent<Collider>().material.bounciness = 0;
     }
 }
