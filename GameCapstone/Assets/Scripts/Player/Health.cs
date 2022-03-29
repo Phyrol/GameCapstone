@@ -7,7 +7,8 @@ public class Health : MonoBehaviour
 {
 
     public ParticleSystem bloodspray;
-    public float StartingPercent = 0.0f;
+    public float StartingPercent;
+    public bool MovementDisabled = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,10 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GetComponent<Rigidbody>().velocity.magnitude >= 0 - Mathf.Epsilon && GetComponent<Rigidbody>().velocity.magnitude <= 0 + Mathf.Epsilon && MovementDisabled)
+        {
+            MovementDisabled = false;
+        }
     }
 
     [PunRPC]
@@ -35,6 +39,7 @@ public class Health : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent/100.0f), ForceMode.Impulse);
         Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
         StartingPercent += 5.0f;
+        StartCoroutine(KnockbackStun());
     }
 
     [PunRPC]
@@ -53,5 +58,12 @@ public class Health : MonoBehaviour
         trail.emitting = true;
         yield return new WaitForSeconds(2f);
         trail.emitting = false;
+    }
+
+    IEnumerator KnockbackStun()
+    {
+        MovementDisabled = true;
+        yield return new WaitForSeconds(StartingPercent/60.0f);
+        MovementDisabled = false;
     }
 }
