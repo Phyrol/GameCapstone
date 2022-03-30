@@ -4,28 +4,45 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Photon.Pun;
 //using Math;
 
 public class TimeLimit : MonoBehaviour
 {
-    public float passed;
-    public float seconds;
-    public float limit;
+    private PhotonView view;
 
+    private float passed;
+    public float seconds;
+    private float limit = 60;
+
+    public GameObject textObject;
     public TextMeshProUGUI timeLimit;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        passed = 0;
+        view = gameObject.GetComponent<PhotonView>();
+    }
 
-        limit = 60;
+    // Start is called before the first frame update
+    private void Start()
+    {
+        if (view.IsMine)
+        {
+            Debug.Log("--Entered Start of Time limit--");
 
-        timeLimit = gameObject.GetComponent<TextMeshProUGUI>();
+            passed = 0;
+
+            textObject = GameObject.Find("TimeLimit");
+            if (textObject == null)
+            {
+                Debug.Log("--didn't find the time limit text--");
+            }
+            timeLimit = textObject.GetComponent<TextMeshProUGUI>();
+        }
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         passed += Time.fixedDeltaTime;
 

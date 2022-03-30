@@ -6,7 +6,7 @@ using Photon.Pun;
 using TMPro;
 using System;
 
-public class TheWall : MonoBehaviour
+public class TheWall : MonoBehaviour//PunCallbacks
 {
     private Vector3 center;
     private float speed;
@@ -14,55 +14,71 @@ public class TheWall : MonoBehaviour
     private double waitTime;
     private double startTime = 3;
 
-    private GameObject timeLimit;
+    public PhotonView view;
+    public GameObject textObject;
 
     private TimeLimit script;
     private bool run;
 
-    void Start()
-    {  
-        float x = (float)(21.05); 
-        center = new Vector3(x, gameObject.transform.localPosition.y, 0); //center of map for now
-        speed = 0.03f; //0.01f is good to me
-                       //quick notes: keep under 1
-        moveTimer = 0;
-        waitTime = 2;
-        run = false;
-        //-----------------------------------------------
-        script = timeLimit.GetComponent<TimeLimit>();
+    private void Awake()
+    {
+        view = gameObject.GetComponentInParent<PhotonView>();
+    }
+    public void Start()
+    {
+        if (view.IsMine)
+        {
+            float x = (float)(21.05);
+            center = new Vector3(x, gameObject.transform.localPosition.y, 0); //center of map for now
+            speed = 0.03f; //0.01f is good to me
+                           //quick notes: keep under 1
+            moveTimer = 0;
+            waitTime = 2;
+            run = false;
+            //-----------------------------------------------
+            textObject = GameObject.Find("TimeLimit");
+            if (textObject == null)
+            {
+                Debug.Log("--didn't find the time limit text--");
+            }
+            script = gameObject.GetComponentInParent<TimeLimit>();
+        }
 
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        moveTimer += Time.fixedDeltaTime;
+        if (view.IsMine)
+        {
+            moveTimer += Time.fixedDeltaTime;
 
-        double initial = moveTimer % 60;
-        double seconds = moveTimer % 60;
-        
-        if(initial < startTime && !run)
-        {
-            timeLimit.GetComponent<TextMeshProUGUI>().color = new Color32(30, 255, 30, 255);
-        }
-        else
-        {
-            run = true;
-        }
+            double initial = moveTimer % 60;
+            double seconds = moveTimer % 60;
 
-        //-------------stuttered movement------------------//
-        if (seconds < waitTime && run)
-        {
-            moveStutter();
-            script.Change(-1);
-        }
-        else if (seconds > (waitTime * 2) && run)
-        {
-            moveTimer = 0;    
-        }
-        else if(run)
-        {
-            script.Change((waitTime * 2) - seconds);
+            if (initial < startTime && !run)
+            {
+                textObject.GetComponent<TextMeshProUGUI>().color = new Color32(30, 255, 30, 255);
+            }
+            else
+            {
+                run = true;
+            }
+
+            //-------------stuttered movement------------------//
+            if (seconds < waitTime && run)
+            {
+                moveStutter();
+                script.Change(-1);
+            }
+            else if (seconds > (waitTime * 2) && run)
+            {
+                moveTimer = 0;
+            }
+            else if (run)
+            {
+                script.Change((waitTime * 2) - seconds);
+            }
         }
     }
 
@@ -88,9 +104,15 @@ public class TheWall : MonoBehaviour
 
     private void moveStutter()
     {
-        if(Vector3.Distance(center, gameObject.transform.localPosition) < 90)
+        /*
+         * if(Vector3.Distance(center, gameObject.transform.localPosition) < 90)
         {
             gameObject.transform.localPosition = Vector3.MoveTowards(transform.localPosition, center, -speed);
+        }
+        */
+        if (Vector3.Distance(center, gameObject.transform.position) < 90)
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, center, -speed);
         }
     }
 
