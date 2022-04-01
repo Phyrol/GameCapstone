@@ -7,6 +7,7 @@ using Photon.Pun.Demo.PunBasics;
 public partial class PlayerController : MonoBehaviour
 {
     PhotonView view;
+    Health healthComponent;
     #region Variables
 
     #region Movement Mechanics
@@ -141,15 +142,16 @@ public partial class PlayerController : MonoBehaviour
         g = baseMovementVariables.initialGravity;
         playerState = PlayerState.InAir;
         baseMovementVariables.StartVariables(capCollider);
+        healthComponent = GetComponent<Health>();
     }
 
     void Update()
     {
         if(view.IsMine)
         {
-            MovementInput();
-            if (jumpMechanic) JumpInput();
-            if (dodgeMechanic) DodgeInput();
+            if (!healthComponent.MovementDisabled) MovementInput();
+            if (jumpMechanic && !healthComponent.MovementDisabled) JumpInput();
+            if (dodgeMechanic && !healthComponent.MovementDisabled) DodgeInput();
         }
     }
 
