@@ -10,17 +10,19 @@ public class IterativeEnabling : MonoBehaviour
     public float time = 0.5f;
     public float cooldownStartingValue = 0.6f;
     private float punchCooldown = 0.0f;
+    public Health healthComponent;
     // Start is called before the first frame update
     void Start()
     {
         col = gameObject.GetComponent<SphereCollider>();
         col.enabled = false;
+        healthComponent = gameObject.transform.parent.gameObject.GetComponent<Health>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && punchCooldown <= 0.0f)
+        if(Input.GetMouseButtonDown(0) && punchCooldown <= 0.0f && !healthComponent.MovementDisabled)
         {
             Debug.Log("COLLISION ENABLED");
             FindObjectOfType<AudioManager>().Play("Punch");
