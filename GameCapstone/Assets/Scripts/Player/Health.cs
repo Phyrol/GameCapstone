@@ -39,6 +39,7 @@ public class Health : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent/100.0f), ForceMode.Impulse);
         Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
         StartingPercent += 5.0f;
+        HealthDisplay.Instance.SetHealthDisplay( StartingPercent );
         StartCoroutine(KnockbackStun());
     }
 

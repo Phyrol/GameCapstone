@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 {
@@ -17,13 +18,13 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.AutomaticallySyncScene = true; // makes it so whatever scene the master client has the players have
-        quickStartButton.SetActive(true);
+        quickStartButton.GetComponent<Button>().enabled = true;
         base.OnConnectedToMaster();
     }
 
     public void QuickStart() // paired to quickstart button
     {
-        quickStartButton.SetActive(false);
+        quickStartButton.GetComponent<Button>().enabled = false;
         //quickCancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom(); // first tries to join an existing room
         Debug.Log("Quick start");
@@ -55,7 +56,7 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     public void QuickCancel()
     {
         //quickCancelButton.SetActive(false);
-        quickStartButton.SetActive(true);
+        quickStartButton.GetComponent<Button>().enabled = true;
         PhotonNetwork.LeaveRoom();
     }
 }
