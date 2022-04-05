@@ -21,7 +21,7 @@ public partial class PlayerController : MonoBehaviour
     public JumpVariables jumpVariables = new JumpVariables();
     public DodgeVariables dodgeVariables = new DodgeVariables();
 
-    public SoftPlatformVariables platformVariables = new SoftPlatformVariables();
+    //public SoftPlatformVariables platformVariables = new SoftPlatformVariables();
 
     #endregion
 
@@ -106,6 +106,8 @@ public partial class PlayerController : MonoBehaviour
     private WaitForFixedUpdate fixedUpdate;
     public static PlayerController singleton;
     public LayerMask triggers;
+    public LayerMask softPlatform;
+    public LayerMask _activeMask;
     #endregion
 
     #endregion
@@ -180,4 +182,16 @@ public partial class PlayerController : MonoBehaviour
     private void SetAnimTrigger(string valName) => animator.SetTrigger(valName);
 
     private void SetAnimFloat(string valName, float val) => animator.SetFloat(valName, val, 0.1f, Time.deltaTime);
+
+    public void SetActiveMask(bool checkPlatforms)
+    {
+        if(checkPlatforms)
+        {
+            _activeMask = triggers;
+        }
+        else
+        {
+            _activeMask = softPlatform;
+        }
+    }
 }

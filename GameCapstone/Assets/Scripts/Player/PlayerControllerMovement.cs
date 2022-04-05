@@ -85,6 +85,17 @@ public partial class PlayerController
         }
         //else if (Input.GetAxis("GamePadHorizontal") != 0) x = Input.GetAxis("GamePadHorizontal") * speedIncrease;
         else x = 0;
+        
+        if (Input.GetKey(KeyCode.S))
+        {
+            if (Physics.SphereCast(transform.position, capCollider.radius, -transform.up, out hit, baseMovementVariables.groundCheckDistance + 0.01f, softPlatform) && hit.transform.CompareTag("SoftPlatform"))
+            {
+                //Debug.Log($"on: {hit.transform.name}");
+                Physics.IgnoreCollision(capCollider, hit.transform.GetComponent<BoxCollider>(), true);
+                SetActiveMask(false);
+            }
+        }
+        
         if (Mathf.Abs(x) > 0) SetAnimFloat("Speed", 1);
         else SetAnimFloat("Speed", 0);
     }
@@ -100,7 +111,7 @@ public partial class PlayerController
             if (_justDodgedCooldown <= 0) Debug.Log("can dodge");
             if (dodgeVariables.justDodgedCooldown > 0) _justDodgedCooldown -= Time.fixedDeltaTime;
         }
-        groundCheck = (!jumpMechanic || _justJumpedCooldown <= 0 || _justDodgedCooldown <= 0) ? Physics.SphereCast(transform.position, capCollider.radius, -transform.up, out hit, baseMovementVariables.groundCheckDistance + 0.01f, ~triggers) : false;
+        groundCheck = (!jumpMechanic || _justJumpedCooldown <= 0 || _justDodgedCooldown <= 0) ? Physics.SphereCast(transform.position, capCollider.radius, -transform.up, out hit, baseMovementVariables.groundCheckDistance + 0.01f, ~_activeMask) : false;
         surfaceSlope = Vector3.Angle(hit.normal, Vector3.up);
         if (surfaceSlope > baseMovementVariables.maxSlope)
         {
@@ -281,8 +292,5 @@ public partial class PlayerController
         g = 0;
         transform.position = lastViablePosition;
     }
-
-    public LayerMask layer;
-
     public void UpdateRespawnPoint() => lastViablePosition = transform.position;
 }
