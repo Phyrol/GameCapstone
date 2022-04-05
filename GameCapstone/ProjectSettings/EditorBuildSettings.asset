@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/QuickStartMenu.unity
     guid: 068a906b7cd3daa41895975090804439
+  - enabled: 0
+    path: Assets/Scenes/SoftPlatformTest.unity
+    guid: cd232d8f1c3f8554dbeb23c427b73777
   m_configObjects: {}

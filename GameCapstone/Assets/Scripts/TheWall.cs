@@ -3,54 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using TMPro;
+using System;
 
-public class TheWall : MonoBehaviour
+public class TheWall : MonoBehaviour//PunCallbacks
 {
-    [SerializeField] public Vector3 center;
-    [SerializeField] public float speed;
+    private Vector3 center;
+    private float speed;
+    private double moveTimer;
+    private double waitTime;
+    private double startTime = 3;
 
-    [SerializeField] public float moveTimer;
-    [SerializeField] public float waitTime;
+    public PhotonView view;
+    public GameObject textObject;
 
-    [SerializeField] public float stopWidth;
+    private TimeLimit script;
+    private bool run;
 
-    //private GameObject notif;
-
-    void Start()
+    private void Awake()
     {
-         speed = 0.05f; //0.01f is good to me
-        //quick notes: keep under 1
-        
-        float x = (float)(21.05);
-        center = new Vector3(x, gameObject.transform.position.y, 0);
-        
-        moveTimer = 0f;
-        waitTime = 2.0f;
+        view = gameObject.GetComponentInParent<PhotonView>();
+    }
+    public void Start()
+    {
+        if (view.IsMine)
+        {
+            float x = (float)(21.05);
+            center = new Vector3(x, gameObject.transform.localPosition.y, 0); //center of map for now
+            speed = 0.03f; //0.01f is good to me
+                           //quick notes: keep under 1
+            moveTimer = 0;
+            waitTime = 2;
+            run = false;
+            //-----------------------------------------------
+            textObject = GameObject.Find("TimeLimit");
+            if (textObject == null)
+            {
+                Debug.Log("--didn't find the time limit text--");
+            }
+            script = gameObject.GetComponentInParent<TimeLimit>();
+        }
 
-        stopWidth = 110f;
-
-        //notif = GameObject.Find("dead text");
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        ///*-------------stuttered movement------------------
-        moveTimer += Time.deltaTime;
-        if (moveTimer < waitTime)
+        if (view.IsMine)
         {
-            moveStutter();
+            moveTimer += Time.fixedDeltaTime;
+
+            double initial = moveTimer % 60;
+            double seconds = moveTimer % 60;
+
+            if (initial < startTime && !run)
+            {
+                textObject.GetComponent<TextMeshProUGUI>().color = new Color32(30, 255, 30, 255);
+            }
+            else
+            {
+                run = true;
+            }
+
+            //-------------stuttered movement------------------//
+            if (seconds < waitTime && run)
+            {
+                moveStutter();
+                script.Change(-1);
+            }
+            else if (seconds > (waitTime * 2) && run)
+            {
+                moveTimer = 0;
+            }
+            else if (run)
+            {
+                script.Change((waitTime * 2) - seconds);
+            }
         }
-        else if (moveTimer > (waitTime * 2))
-        {
-            moveTimer = 0;
-        }
-        //*/
-
-        //-------------smooth movement--------------------
-        //moveSmooth();
-
-
     }
 
     private void OnCollisionEnter(Collision other)
@@ -59,9 +88,6 @@ public class TheWall : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player is dead!!!");
-            //player id dead
-            //Text text = notif.GetComponent<Text>();
-            //text.enabled = true;
 
             other.gameObject.GetComponent<PhotonView>().RPC("Dead", RpcTarget.Others, new object[] { });
         }
@@ -73,38 +99,21 @@ public class TheWall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //check for player tag
-        if(other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Player is dead!!!");
-            //player id dead
-            //Text text = notif.GetComponent<Text>();
-            //text.enabled = true;
-
-            other.gameObject.GetComponent<PhotonView>().RPC("Dead", RpcTarget.Others, new object[] { });
-        }
-        else
-        {
-            Debug.Log("Not Player");
-        }
+        other.gameObject.GetComponent<PhotonView>().RPC("Damage", RpcTarget.Others, new object[] { });
     }
 
     private void moveStutter()
     {
-        if (gameObject.transform.localScale.x < stopWidth)
+        /*
+         * if(Vector3.Distance(center, gameObject.transform.localPosition) < 90)
         {
-            float xscale = gameObject.transform.localScale.x + speed;
-            gameObject.transform.localScale = new Vector3(xscale, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            gameObject.transform.localPosition = Vector3.MoveTowards(transform.localPosition, center, -speed);
         }
-    }
-
-    private void moveSmooth()
-    {
-        if (gameObject.transform.localScale.x < stopWidth)
+        */
+        if (Vector3.Distance(center, gameObject.transform.position) < 90)
         {
-            float xscale = gameObject.transform.localScale.x + speed;
-            gameObject.transform.localScale = new Vector3(xscale, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-        }        
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, center, -speed);
+        }
     }
 
 }

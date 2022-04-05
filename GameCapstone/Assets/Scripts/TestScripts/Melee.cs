@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class IterativeEnabling : MonoBehaviour
+public class Melee : MonoBehaviour
 {
+    PhotonView view;
     private SphereCollider col;
     private bool isRight = true;
     public float time = 0.5f;
@@ -14,6 +15,7 @@ public class IterativeEnabling : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        view = transform.parent.GetComponent<PhotonView>();
         col = gameObject.GetComponent<SphereCollider>();
         col.enabled = false;
         healthComponent = gameObject.transform.parent.gameObject.GetComponent<Health>();
@@ -24,13 +26,16 @@ public class IterativeEnabling : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) && punchCooldown <= 0.0f && !healthComponent.MovementDisabled)
         {
-            Debug.Log("COLLISION ENABLED");
-            FindObjectOfType<AudioManager>().Play("Punch");
-            gameObject.transform.parent.GetComponentInChildren<Animator>().SetTrigger("isPunching");
+            if(view.IsMine)
+            {
+                Debug.Log("COLLISION ENABLED");
+                FindObjectOfType<AudioManager>().Play("Punch");
+                gameObject.transform.parent.GetComponentInChildren<Animator>().SetTrigger("isPunching");
 
-            // play punch animation
-            col.enabled = true;
-            punchCooldown = cooldownStartingValue;
+                // play punch animation
+                col.enabled = true;
+                punchCooldown = cooldownStartingValue;
+            }
         }
         if(punchCooldown > 0.0f)
         {
