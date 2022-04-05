@@ -39,6 +39,7 @@ public class Health : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent/100.0f), ForceMode.Impulse);
         Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
         StartingPercent += 5.0f;
+        HealthDisplay.Instance.SetHealthDisplay( StartingPercent );
         StartCoroutine(KnockbackStun());
     }
 
@@ -64,8 +65,10 @@ public class Health : MonoBehaviour
     {
         MovementDisabled = true;
         GetComponent<Collider>().material.bounciness = 1;
+        GetComponent<PlayerController>().useGravity = false;
         yield return new WaitForSeconds(StartingPercent/60.0f);
         MovementDisabled = false;
         GetComponent<Collider>().material.bounciness = 0;
+        GetComponent<PlayerController>().useGravity = true;
     }
 }
