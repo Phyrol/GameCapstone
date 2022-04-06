@@ -52,4 +52,12 @@ public class CharacterSelection : MonoBehaviour
         // show next character model
         characterList[index].SetActive(true);
     }
+
+    public void ApplySelection()
+    {
+        GameObject.Find("PlayerManager")?.GetComponent<PlayerManager>().SetPlayerCharacter(characterList[index].name);
+
+        Debug.Log($"Set char as {characterList[index].name}");
+
+    }
 }
