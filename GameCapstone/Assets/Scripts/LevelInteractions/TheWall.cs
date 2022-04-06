@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using System;
 
-public class TheWall : MonoBehaviour//PunCallbacks
+public class TheWall : MonoBehaviour //PunCallbacks
 {
+    public double time;
+    
     private Vector3 center;
-    private float speed;
+    private float speed = 0.03f;
     private double moveTimer;
     private double waitTime;
     private double startTime = 3;
@@ -20,28 +23,30 @@ public class TheWall : MonoBehaviour//PunCallbacks
     private TimeLimit script;
     private bool run;
 
+
     private void Awake()
     {
-        view = gameObject.GetComponentInParent<PhotonView>();
+        view = gameObject.GetComponent<PhotonView>();
     }
+
     public void Start()
     {
+        float x = (float)(21.05);
+        center = new Vector3(x, gameObject.transform.localPosition.y, 0);
+
+        textObject = GameObject.Find("TimeLimit");
+        if (textObject == null)
+        {
+            Debug.Log("--didn't find the time limit text--");
+        }
+        script = gameObject.GetComponentInParent<TimeLimit>();
+
+
         if (view.IsMine)
         {
-            float x = (float)(21.05);
-            center = new Vector3(x, gameObject.transform.localPosition.y, 0); //center of map for now
-            speed = 0.03f; //0.01f is good to me
-                           //quick notes: keep under 1
             moveTimer = 0;
             waitTime = 2;
             run = false;
-            //-----------------------------------------------
-            textObject = GameObject.Find("TimeLimit");
-            if (textObject == null)
-            {
-                Debug.Log("--didn't find the time limit text--");
-            }
-            script = gameObject.GetComponentInParent<TimeLimit>();
         }
 
     }
@@ -49,8 +54,8 @@ public class TheWall : MonoBehaviour//PunCallbacks
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (view.IsMine)
-        {
+
+        if (view.IsMine) {
             moveTimer += Time.fixedDeltaTime;
 
             double initial = moveTimer % 60;
@@ -68,8 +73,9 @@ public class TheWall : MonoBehaviour//PunCallbacks
             //-------------stuttered movement------------------//
             if (seconds < waitTime && run)
             {
-                moveStutter();
-                script.Change(-1);
+                view.RPC("moveStutter", RpcTarget.All);
+                script.theTime = -1;
+                script.timeView.RPC("Change", RpcTarget.All);
             }
             else if (seconds > (waitTime * 2) && run)
             {
@@ -77,9 +83,12 @@ public class TheWall : MonoBehaviour//PunCallbacks
             }
             else if (run)
             {
-                script.Change((waitTime * 2) - seconds);
+                script.theTime = (waitTime * 2) - seconds;
+                script.timeView.RPC("Change", RpcTarget.All);
             }
         }
+
+        transform.position = gameObject.transform.position;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -89,7 +98,7 @@ public class TheWall : MonoBehaviour//PunCallbacks
         {
             Debug.Log("Player is dead!!!");
 
-            other.gameObject.GetComponent<PhotonView>().RPC("Dead", RpcTarget.Others, new object[] { });
+            //other.gameObject.GetComponent<PhotonView>().RPC("Dead", RpcTarget.Others, new object[] { });
         }
         else
         {
@@ -99,18 +108,15 @@ public class TheWall : MonoBehaviour//PunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<PhotonView>().RPC("Damage", RpcTarget.Others, new object[] { });
+        Debug.Log("Player is damaged!!!");
+        //other.gameObject.GetComponent<PhotonView>().RPC("Damage", RpcTarget.Others, new object[] { });
     }
 
+    [PunRPC]
     private void moveStutter()
     {
-        /*
-         * if(Vector3.Distance(center, gameObject.transform.localPosition) < 90)
-        {
-            gameObject.transform.localPosition = Vector3.MoveTowards(transform.localPosition, center, -speed);
-        }
-        */
-        if (Vector3.Distance(center, gameObject.transform.position) < 90)
+        //*/
+        if (!(Mathf.Abs(gameObject.transform.position.x - center.x) > 90))
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, center, -speed);
         }

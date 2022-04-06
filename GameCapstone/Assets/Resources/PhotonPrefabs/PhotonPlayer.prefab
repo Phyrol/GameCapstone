@@ -887,10 +887,6 @@ MonoBehaviour:
     dodgeStrength: 13
     justDodgedCooldown: 0.1
     inAirDodges: 1
-  platformVariables:
-    timeRemaining: 1
-    timerIsRunning: 0
-    down: 0
   isGrounded: 0
   onFakeGround: 0
   playerState: 0
@@ -901,12 +897,15 @@ MonoBehaviour:
   triggers:
     serializedVersion: 2
     m_Bits: 0
+  softPlatform:
+    serializedVersion: 2
+    m_Bits: 0
+  _activeMask:
+    serializedVersion: 2
+    m_Bits: 0
   animator: {fileID: 3934717455006213429}
   mesh: {fileID: 3934717455006213431}
   dirtparticles: {fileID: 288616804647966519}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &8563582119022108863
 MonoBehaviour:
   m_ObjectHideFlags: 0
