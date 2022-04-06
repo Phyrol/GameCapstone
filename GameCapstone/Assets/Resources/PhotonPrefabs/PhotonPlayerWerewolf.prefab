@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 8118277736611301286}
   - component: {fileID: 784473177877491788}
   m_Layer: 0
-  m_Name: PhotonPlayer
+  m_Name: PhotonPlayerWerewolf
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

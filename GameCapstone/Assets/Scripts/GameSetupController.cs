@@ -35,7 +35,22 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
         int rnd = Random.Range(0, spawnPoints.Length - 1);
 
-        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), spawnPoints[rnd].transform.position, Quaternion.identity);
+        string charName;
+        GameObject playerMng = GameObject.Find("PlayerManager");
+        switch(playerMng?.GetComponent<PlayerManager>().GetPlayerCharacter())
+        {
+            case "pumpkinheadRIGGED":
+                charName = "Pumpkin";
+                break;
+            case "vampRIGGED":
+                charName = "Vampire";
+                break;
+            default:
+                charName = "Pumpkin";
+                break;
+        }
+        Debug.Log($"Spawning: {charName}");
+        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", $"PhotonPlayer{charName}"), spawnPoints[rnd].transform.position, Quaternion.identity);
         Destroy(spawnPoints[rnd]);
 
         DontDestroyOnLoad(player);
