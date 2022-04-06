@@ -9,10 +9,9 @@ using Photon.Pun;
 
 public class TimeLimit : MonoBehaviour
 {
-    private PhotonView view;
+    public PhotonView timeView;
 
-    private float passed;
-    public float seconds;
+    private double time;
     private float limit = 60;
 
     public GameObject textObject;
@@ -20,17 +19,18 @@ public class TimeLimit : MonoBehaviour
 
     private void Awake()
     {
-        view = gameObject.GetComponent<PhotonView>();
+        timeView = gameObject.GetComponent<PhotonView>();
+        gameObject.tag = "Wall";
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        if (view.IsMine)
+        if (timeView.IsMine)
         {
             Debug.Log("--Entered Start of Time limit--");
 
-            passed = 0;
+            //timePassed = 0;
 
             textObject = GameObject.Find("TimeLimit");
             if (textObject == null)
@@ -38,18 +38,27 @@ public class TimeLimit : MonoBehaviour
                 Debug.Log("--didn't find the time limit text--");
             }
             timeLimit = textObject.GetComponent<TextMeshProUGUI>();
+
+            //CreationTime = PhotonNetwork.Time;
         }
+
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
-    {
-        passed += Time.fixedDeltaTime;
-
-        seconds = passed % 60;  
+    public double theTime
+    { // This is a property.
+        get
+        {
+            return time;
+        }
+        set
+        {
+            time = value; // Note the use of the implicit variable "value" here.
+        }
     }
 
-    public void Change(double time)
+    [PunRPC]
+    public void Change()
     {
         if (time == -1)
         {
@@ -62,4 +71,5 @@ public class TimeLimit : MonoBehaviour
             timeLimit.GetComponent<TextMeshProUGUI>().color = new Color32(255, 255, 255, 255);
         }
     }
+    
 }
