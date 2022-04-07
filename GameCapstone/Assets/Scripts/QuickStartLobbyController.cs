@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 {
@@ -15,6 +16,11 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     [SerializeField]
     private int RoomSize; // manual set the number of players in the room at one time
 
+    [SerializeField]
+    private TextMeshProUGUI countBack;
+    [SerializeField]
+    private TextMeshProUGUI countFront;
+
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.AutomaticallySyncScene = true; // makes it so whatever scene the master client has the players have
@@ -25,8 +31,9 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     public void QuickStart() // paired to quickstart button
     {
         quickStartButton.GetComponent<Button>().enabled = false;
+        StartCoroutine(startCountdown());
         //quickCancelButton.SetActive(true);
-        PhotonNetwork.JoinRandomRoom(); // first tries to join an existing room
+        //PhotonNetwork.JoinRandomRoom(); // first tries to join an existing room
         Debug.Log("Quick start");
     }
 
@@ -58,5 +65,18 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         //quickCancelButton.SetActive(false);
         quickStartButton.GetComponent<Button>().enabled = true;
         PhotonNetwork.LeaveRoom();
+    }
+
+    private IEnumerator startCountdown()
+    {
+        Debug.Log("counting down");
+        for( int i = 5; i > 0; i-- )
+        {
+            countBack.text = i.ToString();
+            countFront.text = i.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+        FindObjectOfType<LoadingScreen>().TriggerLoadScreen();
+        PhotonNetwork.JoinRandomRoom();
     }
 }

@@ -181,7 +181,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void SetAnimTrigger(string valName) => animator.SetTrigger(valName);
 
-    private void SetAnimFloat(string valName, float val) => animator.SetFloat(valName, val, 0.1f, Time.deltaTime);
+    private void SetAnimFloat(string valName, float val) => animator.SetFloat(valName, val, 0.05f, Time.deltaTime);
 
     public void SetActiveMask(bool checkPlatforms)
     {
