@@ -45,6 +45,9 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             case "vampRIGGED":
                 charName = "Vampire";
                 break;
+            case "werewolfRIGGED":
+            charName = "Werewolf";
+            break;
             default:
                 charName = "Pumpkin";
                 break;
