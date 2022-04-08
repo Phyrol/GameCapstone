@@ -4,7 +4,7 @@ using UnityEngine;
 public class QuickStartRoomController : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private int multiplayerSceneIndex; // Number for the build index to the multiplay scene
+    private int multiplayerSceneIndex = 1; // Number for the build index to the multiplay scene
 
     public override void OnEnable()
     {
