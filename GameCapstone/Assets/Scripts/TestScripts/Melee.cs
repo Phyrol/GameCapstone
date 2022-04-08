@@ -64,6 +64,6 @@ public class Melee : MonoBehaviour
             Debug.Log("DAMAGING");
             other.gameObject.GetComponent<PhotonView>().RPC("Damage", RpcTarget.Others, new object[] { new Vector3(transform.parent.transform.right.x * 10, 5, 0) });
         }
-        col.enabled = false;
+        if(col != null) col.enabled = false;
     }
 }

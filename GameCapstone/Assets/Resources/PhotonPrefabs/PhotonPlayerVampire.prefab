@@ -349,6 +349,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2971495603632777860, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971495603632777860, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[1].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971495603632777860, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[2].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971495603632777860, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[3].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971495603632777860, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[4].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971495603632777860, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[5].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971495603632777860, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[6].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971495603632777860, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
+      propertyPath: m_SynchronizeParameters.Array.data[7].SynchronizeType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2975458087375815230, guid: 5d68c05564c4e2346b8b87d5d5e11994, type: 3}
       propertyPath: m_Name
       value: vampRIGGED
