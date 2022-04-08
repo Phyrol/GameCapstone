@@ -37,7 +37,7 @@ public class TimeLimit : MonoBehaviour
             {
                 Debug.Log("--didn't find the time limit text--");
             }
-            timeLimit = textObject.GetComponent<TextMeshProUGUI>();
+            //timeLimit = textObject.GetComponent<TextMeshProUGUI>();
 
             //CreationTime = PhotonNetwork.Time;
         }
@@ -60,16 +60,16 @@ public class TimeLimit : MonoBehaviour
     [PunRPC]
     public void Change()
     {
-        if (time == -1)
-        {
-            timeLimit.text = "Closing In!!!";
-            timeLimit.GetComponent<TextMeshProUGUI>().color = new Color32(230, 30, 30, 255);
-        }
-        else
-        {
-            timeLimit.text = "Time Left: " + (Math.Ceiling(time)).ToString();
-            timeLimit.GetComponent<TextMeshProUGUI>().color = new Color32(255, 255, 255, 255);
-        }
+        //if (time == -1)
+        //{
+        //    timeLimit.text = "Closing In!!!";
+        //    timeLimit.GetComponent<TextMeshProUGUI>().color = new Color32(230, 30, 30, 255);
+        //}
+        //else
+        //{
+        //    timeLimit.text = "Time Left: " + (Math.Ceiling(time)).ToString();
+        //    timeLimit.GetComponent<TextMeshProUGUI>().color = new Color32(255, 255, 255, 255);
+        //}
     }
     
 }

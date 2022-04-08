@@ -18,32 +18,33 @@ public class roomSetup : MonoBehaviourPunCallbacks
             Debug.Log("--Making Death wall--");
             GameObject wall = PhotonNetwork.InstantiateRoomObject("DeathWALL", new Vector3(0, 0, 0), Quaternion.identity, 0, null);
 
-            DontDestroyOnLoad(wall);
+            if(wall != null)
+                DontDestroyOnLoad(wall);
         }
         else
         {
             Debug.Log("There was already a Wall");
         }
 
-        //---------------Add hazard code -------------------//
-        if (hazards.Length == 0)
-        {
-            hazards = GameObject.FindGameObjectsWithTag("Hazard");
-        }
-        foreach (GameObject obj in hazards)
-        {
-            obj.AddComponent<Hazard>();
-        }
+        ////---------------Add hazard code -------------------//
+        //if (hazards.Length == 0)
+        //{
+        //    hazards = GameObject.FindGameObjectsWithTag("Hazard");
+        //}
+        //foreach (GameObject obj in hazards)
+        //{
+        //    obj.AddComponent<Hazard>();
+        //}
 
-        //---------------Add soft platform code -------------------//
-        if (softPlatforms.Length == 0)
-        {
-            softPlatforms = GameObject.FindGameObjectsWithTag("Soft");
-        }
-        foreach (GameObject obj in softPlatforms)
-        {
-            obj.AddComponent<SoftPlatform>();
-        }
+        ////---------------Add soft platform code -------------------//
+        //if (softPlatforms.Length == 0)
+        //{
+        //    softPlatforms = GameObject.FindGameObjectsWithTag("Soft");
+        //}
+        //foreach (GameObject obj in softPlatforms)
+        //{
+        //    obj.AddComponent<SoftPlatform>();
+        //}
     }
 
 

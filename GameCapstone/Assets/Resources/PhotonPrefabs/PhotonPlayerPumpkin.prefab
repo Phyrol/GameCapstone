@@ -439,6 +439,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3934717455101080224}
     m_Modifications:
+    - target: {fileID: 4430993774548001843, guid: 2cde4aeddd5f72943a7191a353ed8fbb, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430993774548001843, guid: 2cde4aeddd5f72943a7191a353ed8fbb, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6150602561641970668, guid: 2cde4aeddd5f72943a7191a353ed8fbb, type: 3}
       propertyPath: m_Name
       value: pumpkinheadRIGGED
