@@ -28,19 +28,22 @@ public class Health : MonoBehaviour
     [PunRPC]
     void Damage(Vector3 direction)
     {
-        GetComponentInChildren<Animator>().SetTrigger("isPunched");
-        FindObjectOfType<AudioManager>().Play("Damage");
-        
-        bloodspray.Clear();
-        bloodspray.Play();
+        if(gameObject.layer != 6)
+        {
+            GetComponentInChildren<Animator>().SetTrigger("isPunched");
+            FindObjectOfType<AudioManager>().Play("Damage");
 
-        StartCoroutine(EmitTrail());
+            bloodspray.Clear();
+            bloodspray.Play();
 
-        GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent/100.0f), ForceMode.Impulse);
-        Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
-        StartingPercent += 5.0f;
-        HealthDisplay.Instance.SetHealthDisplay( StartingPercent );
-        StartCoroutine(KnockbackStun());
+            StartCoroutine(EmitTrail());
+
+            GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent / 100.0f), ForceMode.Impulse);
+            Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
+            StartingPercent += 5.0f;
+            HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
+            StartCoroutine(KnockbackStun());
+        }
     }
 
     [PunRPC]
