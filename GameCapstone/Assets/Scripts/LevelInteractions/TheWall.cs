@@ -12,7 +12,7 @@ public class TheWall : MonoBehaviour //PunCallbacks
     public double time;
     
     private Vector3 center;
-    private float speed = 0.03f;
+    private float speed = 0.1f; //0.03f
     private double moveTimer;
     private double waitTime;
     private double startTime = 3;
@@ -23,6 +23,8 @@ public class TheWall : MonoBehaviour //PunCallbacks
     private TimeLimit script;
     private bool run;
 
+    private Vector3 start;
+
 
     private void Awake()
     {
@@ -31,8 +33,10 @@ public class TheWall : MonoBehaviour //PunCallbacks
 
     public void Start()
     {
-        float x = (float)(21.05);
+        float x = 21.05f;
         center = new Vector3(x, gameObject.transform.localPosition.y, 0);
+        start = gameObject.transform.position;
+
 
         textObject = GameObject.Find("TimeLimit");
         if (textObject == null)
@@ -48,7 +52,6 @@ public class TheWall : MonoBehaviour //PunCallbacks
             waitTime = 2;
             run = false;
         }
-
     }
 
     // Update is called once per frame
@@ -108,15 +111,14 @@ public class TheWall : MonoBehaviour //PunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Player is damaged!!!");
+        //Debug.Log("Player is damaged!!!");
         //other.gameObject.GetComponent<PhotonView>().RPC("Damage", RpcTarget.Others, new object[] { });
     }
 
     [PunRPC]
     private void moveStutter()
     {
-        //*/
-        if (!(Mathf.Abs(gameObject.transform.position.x - center.x) > 90))
+        if (Vector3.Distance(gameObject.transform.position, start) < 50f)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, center, -speed);
         }
