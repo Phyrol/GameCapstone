@@ -179,6 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
+  speed: 0.03
+  startTime: 30
   view: {fileID: 0}
   textObject: {fileID: 0}
 --- !u!65 &3531336320232519903
@@ -369,6 +371,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
+  speed: 0.03
+  startTime: 30
   view: {fileID: 0}
   textObject: {fileID: 0}
 --- !u!65 &3531336320325697771

@@ -12,10 +12,12 @@ public class TheWall : MonoBehaviour //PunCallbacks
     public double time;
     
     private Vector3 center;
-    private float speed = 0.1f; //0.03f
+    [SerializeField]
+    private float speed = 0.03f; //0.03f
     private double moveTimer;
     private double waitTime;
-    private double startTime = 3;
+    [SerializeField]
+    private double startTime = 30;
 
     public PhotonView view;
     public GameObject textObject;
@@ -49,7 +51,7 @@ public class TheWall : MonoBehaviour //PunCallbacks
         if (view.IsMine)
         {
             moveTimer = 0;
-            waitTime = 2;
+            waitTime = 20;
             run = false;
         }
     }
