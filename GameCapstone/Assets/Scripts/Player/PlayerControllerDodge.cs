@@ -53,10 +53,13 @@ public partial class PlayerController
         previousState = playerState;
         playerState = PlayerState.Dodging;
 
+        //change layer to Dodging
+        gameObject.layer = 6;
+
         rb.velocity = x == 0 ? transform.right * dodgeVariables.dodgeStrength : currentRight.normalized * dodgeVariables.dodgeStrength;
 
         // when animation ends, give control back to player
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
 
         // trail off
         GetComponentInChildren<TrailRenderer>().emitting = false;
@@ -65,6 +68,9 @@ public partial class PlayerController
         previousState = playerState;
         if (!isGrounded) playerState = PlayerState.InAir;
         else playerState = PlayerState.Grounded;
+
+        //change layer to Player
+        gameObject.layer = 3;
         
     }
     public void SetVariablesOnDodge()

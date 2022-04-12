@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelLayout_OfficialAssets.unity
     guid: c664b02564cf55c4189ed79eb2dd9d0e
+  - enabled: 1
+    path: Assets/Scenes/CustomLobby.unity
+    guid: 79ab8ef78071b9b4f89f72859980412f
   - enabled: 0
     path: Assets/Scenes/Testing/TestLevelLayout.unity
     guid: 06162c0356ebfc64891825b8cee61047
