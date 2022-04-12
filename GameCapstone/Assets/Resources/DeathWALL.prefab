@@ -193,7 +193,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.90341187, y: 68.24391, z: 1}
-  m_Center: {x: -36.593224, y: 33.621956, z: 0}
+  m_Center: {x: 81.5, y: 34.7, z: 0}
 --- !u!65 &3531336320232519902
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ BoxCollider:
   m_GameObject: {fileID: 3531336320232519874}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 11.9763565, y: 68.24391, z: 1}
   m_Center: {x: 76.52872, y: 33.621956, z: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PositionModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 2
@@ -260,7 +260,7 @@ MonoBehaviour:
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
@@ -292,9 +292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 0
+  m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
+  m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &3531336320325697774
 GameObject:
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 3531336320325697771}
   - component: {fileID: 3531336320325697770}
   - component: {fileID: 5950568803102017571}
-  - component: {fileID: 59544174127692775}
+  - component: {fileID: 4642673296854837014}
   - component: {fileID: 7471769176003440504}
   - component: {fileID: 433790042093389945}
   m_Layer: 0
@@ -382,8 +382,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9560013, y: 68.76732, z: 1}
-  m_Center: {x: -36.56329, y: 33.88366, z: 0}
+  m_Size: {x: 0.90341187, y: 68.24391, z: 1}
+  m_Center: {x: 81.6, y: 34.7, z: 0}
 --- !u!65 &3531336320325697770
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -393,7 +393,7 @@ BoxCollider:
   m_GameObject: {fileID: 3531336320325697774}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 11.396698, y: 68.76732, z: 1}
   m_Center: {x: 76.659454, y: 33.88366, z: 0}
@@ -416,12 +416,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 59544174127692775}
+  - {fileID: 4642673296854837014}
   - {fileID: 433790042093389945}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &59544174127692775
+--- !u!114 &4642673296854837014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,13 +430,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 3531336320325697774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!54 &7471769176003440504
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -465,9 +482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 0
+  m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
+  m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
 --- !u!1001 &1478393414449869621
 PrefabInstance:

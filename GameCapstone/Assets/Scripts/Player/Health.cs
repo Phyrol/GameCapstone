@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public PhotonView view;
 
     public ParticleSystem bloodspray;
     public float StartingPercent;
@@ -13,7 +14,7 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        view = gameObject.GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -47,13 +48,23 @@ public class Health : MonoBehaviour
     }
 
     [PunRPC]
-    void Dead()
+    void Dead(int viewID)
     {
-        //play death animation
-        GetComponentInChildren<Animator>().SetTrigger("isDead");
-        FindObjectOfType<AudioManager>().Play("Death");
-        PhotonNetwork.Destroy(gameObject);
-        Debug.Log("I AM DEAD");
+        if(view.ViewID == viewID)
+        {
+            //play death animation
+            GetComponentInChildren<Animator>().SetTrigger("isDead");
+            FindObjectOfType<AudioManager>().Play("Death");
+            //PhotonNetwork.Destroy(gameObject);
+            //temp:
+            gameObject.GetComponent<PlayerController>().enabled = false;
+            
+            gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+            gameObject.GetComponentInChildren<Melee>().enabled = false;
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            // end temp
+            Debug.Log("I AM DEAD");
+        }
     }
 
     IEnumerator EmitTrail()
