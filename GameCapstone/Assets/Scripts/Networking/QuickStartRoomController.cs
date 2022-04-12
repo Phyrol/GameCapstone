@@ -27,10 +27,7 @@ public class QuickStartRoomController : MonoBehaviourPunCallbacks
 
     private void StartGame() // Function for loading into the multiplayer scene
     {
-        if(PhotonNetwork.IsMasterClient)
-        {
             Debug.Log("Starting Game");
             PhotonNetwork.LoadLevel(multiplayerSceneIndex); // because of AutoSyncScene all players who join the room will load this scene
-        }
     }
 }
