@@ -96,12 +96,16 @@ public class TheWall : MonoBehaviour //PunCallbacks
 
     private void OnCollisionEnter(Collision other)
     {
+        if (!view.IsMine)
+            return;
+
         //check for player tag
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player is dead!!!");
 
-            //other.gameObject.GetComponent<PhotonView>().RPC("Dead", RpcTarget.Others, new object[] { });
+            int playerViewID = other.collider.GetComponent<PhotonView>().ViewID;
+            other.collider.GetComponent<Health>().view.RPC("Dead", RpcTarget.All, new object[] { playerViewID } );
         }
         else
         {
