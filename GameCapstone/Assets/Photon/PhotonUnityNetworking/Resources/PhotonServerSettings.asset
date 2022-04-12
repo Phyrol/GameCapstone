@@ -43,6 +43,11 @@ MonoBehaviour:
   - Dead
   - Change
   - moveStutter
+  - Spawn
+  - SetAll
+  - GetSpawn
+  - SetSpawn
+  - Increment
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
