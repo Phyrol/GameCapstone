@@ -17,8 +17,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     void Start()
     {
         // The start button will only appear for the host
-        if (PhotonNetwork.IsMasterClient) hostStartButton.interactable = true;
-        else hostStartButton.gameObject.SetActive(false);
+        if (PhotonNetwork.IsMasterClient && hostStartButton != null ) hostStartButton.interactable = true;
+        else if ( hostStartButton != null) hostStartButton.gameObject.SetActive(false);
     }
 
     public void CreateRoom()
