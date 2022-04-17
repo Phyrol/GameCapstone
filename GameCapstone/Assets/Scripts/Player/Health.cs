@@ -63,6 +63,7 @@ public class Health : MonoBehaviour
             gameObject.GetComponentInChildren<Melee>().enabled = false;
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             // end temp
+            FindObjectOfType<ShowWinLose>().showLoseScreen();
             Debug.Log("I AM DEAD");
         }
     }

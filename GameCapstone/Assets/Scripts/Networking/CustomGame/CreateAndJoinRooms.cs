@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     public InputField createInput;
     public InputField joinInput;
+
+    public Button hostStartButton;
+    public TextMeshProUGUI countFront;
+    public TextMeshProUGUI countBack;
+
+    void Start()
+    {
+        // The start button will only appear for the host
+        if (PhotonNetwork.IsMasterClient && hostStartButton != null ) hostStartButton.interactable = true;
+        else if ( hostStartButton != null) hostStartButton.gameObject.SetActive(false);
+    }
 
     public void CreateRoom()
     {
@@ -26,10 +38,28 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void StartCustomGame()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient) StartCoroutine(startCountdown());
+    }
+
+    public void LoadMainLevel()
+    {
+        Debug.Log("Starting Game");
+        PhotonNetwork.LoadLevel(1); // because of AutoSyncScene all players who join the room will load this scene
+    }
+
+    public IEnumerator startCountdown()
+    {
+        Debug.Log("counting down . . .");
+        for( int i = 5; i > 0; i-- )
         {
-            Debug.Log("Starting Game");
-            PhotonNetwork.LoadLevel(1); // because of AutoSyncScene all players who join the room will load this scene
+            countFront.text = i.ToString();
+            countBack.text = i.ToString();
+            yield return new WaitForSeconds(1f);
         }
+
+        FindObjectOfType<LoadingScreen>().TriggerLoadScreen();
+        yield return new WaitForSeconds(1f);
+
+        LoadMainLevel();
     }
 }
