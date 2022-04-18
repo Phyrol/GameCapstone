@@ -12,24 +12,13 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     public int numberPlayers;
 
     private PhotonView view;
-    private Vector3 spawnPos;
+    private int spawnNum;
 
     private void Start()
     {
         view = gameObject.GetComponent<PhotonView>();
 
         spawnPointList = GameObject.Find("SpawnPoints");
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            Debug.Log("master sets the num of players");
-            numberPlayers = 0;
-            view.RPC("SetAll", RpcTarget.All, 0);
-        }
-        else
-        {
-            Debug.Log("not master");
-        }
 
         //spawnPoints = new GameObject[9];
         int i = 0;
@@ -47,14 +36,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks
     private void CreatePlayer()
     {      
         Debug.Log("Creating Player");
-        //Debug.Log("before spawn: " + numberPlayers);
-
-        numberPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
-
-        spawnPos = Spawn(); 
-
-        //Debug.Log("after spawn: " + numberPlayers);
-
 
         string charName;
         GameObject playerMng = GameObject.Find("PlayerManager");
@@ -74,24 +55,17 @@ public class GameSetupController : MonoBehaviourPunCallbacks
                 break;
         }
         Debug.Log($"Spawning: {charName}");
-        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", $"PhotonPlayer{charName}"), spawnPos, Quaternion.identity);
+        //GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", $"PhotonPlayer{charName}"), spawnPos, Quaternion.identity);
+        spawnNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+        if(spawnNum > 9)
+        {
+            Debug.Log("Hitting limit!!!");
+            spawnNum = 0;
+        }
+        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", $"PhotonPlayer{charName}"), spawnPoints[spawnNum].transform.position, Quaternion.identity);
         //Destroy(spawnPoints[rnd]);
 
         DontDestroyOnLoad(player);
     }
-
-    private Vector3 Spawn()
-    {
-
-        if (numberPlayers < 10)
-        {
-            //Debug.Log("make " + numberPlayers +" player");
-            spawnPos = spawnPoints[numberPlayers - 1].transform.position;
-        }
-        else
-        {
-            spawnPos = spawnPoints[0].transform.position;
-        }      
-        return spawnPos;
-    }
 }
+
