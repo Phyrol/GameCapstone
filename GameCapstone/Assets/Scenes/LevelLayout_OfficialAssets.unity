@@ -60977,6 +60977,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1208479335}
     m_Modifications:
+    - target: {fileID: 1256264444921208942, guid: 731c526f8c947bd4dbb92fae9f0a63b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.025
+      objectReference: {fileID: 0}
     - target: {fileID: 6139006321787141126, guid: 731c526f8c947bd4dbb92fae9f0a63b6, type: 3}
       propertyPath: m_Name
       value: Short Soft Grass (8)
