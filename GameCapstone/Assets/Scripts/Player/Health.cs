@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
     }
 
     [PunRPC]
-    void Damage(Vector3 direction)
+    void MeleeDamage(Vector3 direction, float damage)
     {
         if(gameObject.layer != 6)
         {
@@ -41,9 +41,19 @@ public class Health : MonoBehaviour
 
             GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent / 100.0f), ForceMode.Impulse);
             Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
-            StartingPercent += 5.0f;
+            StartingPercent += damage;
             HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
             StartCoroutine(KnockbackStun());
+        }
+    }
+
+    [PunRPC]
+    void EnvironmentDamage(float damage, int viewId)
+    {
+        if (view.ViewID == viewId)
+        {
+            StartingPercent += damage;
+            HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
         }
     }
 
@@ -66,6 +76,12 @@ public class Health : MonoBehaviour
             FindObjectOfType<ShowWinLose>().showLoseScreen();
             Debug.Log("I AM DEAD");
         }
+    }
+
+    void AddDamage(float damage)
+    {
+        StartingPercent += damage;
+        HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
     }
 
     IEnumerator EmitTrail()

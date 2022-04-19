@@ -7,6 +7,8 @@ public class Melee : MonoBehaviour
 {
     PhotonView view;
     private SphereCollider col;
+    [SerializeField]
+    private float punchDamage = 5.0f;
     private bool isRight = true;
     public float time = 0.5f;
     public float cooldownStartingValue = 0.6f;
@@ -61,8 +63,8 @@ public class Melee : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("DAMAGING");
-            other.gameObject.GetComponent<PhotonView>().RPC("Damage", RpcTarget.Others, new object[] { new Vector3(transform.parent.transform.right.x * 10, 5, 0) });
+            //Debug.Log("DAMAGING");
+            other.gameObject.GetComponent<PhotonView>().RPC("MeleeDamage", RpcTarget.Others, new object[] { new Vector3(transform.parent.transform.right.x * 10, 5, 0), punchDamage });
         }
         if(col != null) col.enabled = false;
     }
