@@ -108,7 +108,7 @@ public partial class PlayerController
         }
         if(dodgeMechanic)
         {
-            if (_justDodgedCooldown <= 0) Debug.Log("can dodge");
+            //if (_justDodgedCooldown <= 0) Debug.Log("can dodge");
             if (dodgeVariables.justDodgedCooldown > 0) _justDodgedCooldown -= Time.fixedDeltaTime;
         }
         groundCheck = (!jumpMechanic || _justJumpedCooldown <= 0 || _justDodgedCooldown <= 0) ? Physics.SphereCast(transform.position, capCollider.radius, -transform.up, out hit, baseMovementVariables.groundCheckDistance + 0.01f, ~_activeMask) : false;

@@ -41,19 +41,42 @@ public class Health : MonoBehaviour
 
             GetComponent<Rigidbody>().AddForce(direction * (1 + StartingPercent / 100.0f), ForceMode.Impulse);
             Debug.Log($"DAMAGED: {direction * (1 + StartingPercent / 100.0f)}");
+
             StartingPercent += damage;
-            HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
+
+            ExitGames.Client.Photon.Hashtable newProperties = PhotonNetwork.LocalPlayer.CustomProperties;
+            newProperties[StringConstants.CustomProperties_PlayerHealth] = StartingPercent;
+            PhotonNetwork.LocalPlayer.SetCustomProperties(newProperties);
+
+            Debug.Log($"{PhotonNetwork.LocalPlayer.ActorNumber}");
+            PhotonView.Get(LevelUIHandler.instance).RPC("UpdateHealth", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber);
+
+            //HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
+
             StartCoroutine(KnockbackStun());
         }
     }
 
     [PunRPC]
-    void EnvironmentDamage(float damage, int viewId)
+    void EnvironmentDamage(float damage, int playerNum)
     {
-        if (view.ViewID == viewId)
+        int myPlayerNum = PhotonNetwork.LocalPlayer.ActorNumber;
+
+        if(myPlayerNum == playerNum)
         {
             StartingPercent += damage;
-            HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
+
+            ExitGames.Client.Photon.Hashtable newProperties = PhotonNetwork.LocalPlayer.CustomProperties;
+            newProperties[StringConstants.CustomProperties_PlayerHealth] = StartingPercent;
+            PhotonNetwork.LocalPlayer.SetCustomProperties(newProperties);
+
+            Debug.Log($"My player number: {PhotonNetwork.LocalPlayer.ActorNumber}");
+
+            LevelUIHandler.instance.UpdateHealth(myPlayerNum);
+
+            //PhotonView.Get(LevelUIHandler.instance).RPC("UpdateHealth", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber);
+
+            //HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
         }
     }
 
