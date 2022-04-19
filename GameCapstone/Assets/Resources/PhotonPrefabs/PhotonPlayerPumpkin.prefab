@@ -185,7 +185,7 @@ MonoBehaviour:
     m_Bits: 0
   softPlatform:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   _activeMask:
     serializedVersion: 2
     m_Bits: 0

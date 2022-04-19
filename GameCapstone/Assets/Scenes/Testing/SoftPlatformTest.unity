@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 133569544}
   - component: {fileID: 133569543}
   - component: {fileID: 133569542}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: DetectionTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133569540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.89, z: 0}
+  m_LocalPosition: {x: 0, y: -1.96, z: 0}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 431333766}
@@ -1035,11 +1035,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entryDirection: {x: 0, y: 1, z: 0}
   localDirection: 0
-  triggerScale: {x: 4, y: 7, z: 4}
-  below: 0
-  down: 0
-  timeRemaining: 1
-  timerIsRunning: 0
 --- !u!65 &133569543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2770,7 +2765,7 @@ GameObject:
   - component: {fileID: 431333769}
   - component: {fileID: 431333768}
   - component: {fileID: 431333767}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SoftPlatformTestPlatform
   m_TagString: SoftPlatform
   m_Icon: {fileID: 0}
@@ -8608,7 +8603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -249392837939475592, guid: acdfe29b992e42d4c99f78cb1c9e7253, type: 3}
       propertyPath: softPlatform.m_Bits
-      value: 64
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 240763020834894091, guid: acdfe29b992e42d4c99f78cb1c9e7253, type: 3}
       propertyPath: m_Layer
@@ -12547,7 +12542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 0}
-  spawnPointList: {fileID: 0}
+  numberPlayers: 0
 --- !u!4 &2143606723
 Transform:
   m_ObjectHideFlags: 0
@@ -12722,6 +12717,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerOverlay
       objectReference: {fileID: 0}
+    - target: {fileID: 6456112504636815211, guid: 2f710182f53943148a449a3d977fdc5d, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f710182f53943148a449a3d977fdc5d, type: 3}
 --- !u!1001 &3531336320042255279
@@ -12731,6 +12730,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 705534776009698850, guid: 1146280bcefba1e4fb3b01b6f96b1eba, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3531336319937855714, guid: 1146280bcefba1e4fb3b01b6f96b1eba, type: 3}
       propertyPath: sceneViewId
       value: 2
@@ -12782,6 +12785,10 @@ PrefabInstance:
     - target: {fileID: 3531336319937855716, guid: 1146280bcefba1e4fb3b01b6f96b1eba, type: 3}
       propertyPath: m_Name
       value: DeathWALL
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950568803102017571, guid: 1146280bcefba1e4fb3b01b6f96b1eba, type: 3}
+      propertyPath: sceneViewId
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1146280bcefba1e4fb3b01b6f96b1eba, type: 3}
