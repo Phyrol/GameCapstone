@@ -1212,13 +1212,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7297697863933759098}
+  - component: {fileID: 8302557540874419493}
   m_Layer: 5
   m_Name: HostRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7297697863933759098
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1242,6 +1243,19 @@ RectTransform:
   m_AnchoredPosition: {x: -5.448, y: 11.4}
   m_SizeDelta: {x: 1374.834, y: 985.97}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8302557540874419493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297697863933759099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24beaa9a08e4674283a1be5558b19b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameSlots: {fileID: 7297697864268987886}
 --- !u!1 &7297697863992907243
 GameObject:
   m_ObjectHideFlags: 0

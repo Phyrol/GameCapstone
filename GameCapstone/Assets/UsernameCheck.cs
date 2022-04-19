@@ -8,6 +8,8 @@ public class UsernameCheck : MonoBehaviour
 {
     public GameObject MainMenu;
     public GameObject InputScreen;
+    [SerializeField]
+    private GameObject PlayerManager;
     //public GameObject ErrorText;
     private string username { set; get; }
 
@@ -34,9 +36,15 @@ public class UsernameCheck : MonoBehaviour
         {
             //Debug.Log("username accepted");
             username = result;
+            SubmitName(username);
             MainMenu.SetActive(true);
             InputScreen.SetActive(false);
         }
+    }
+
+    public void SubmitName(string name)
+    {
+        PlayerManager.GetComponent<PlayerManager>().SetPlayerName(name);
     }
 
     private bool badWords(string result)

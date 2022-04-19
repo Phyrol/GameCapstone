@@ -50,6 +50,10 @@ MonoBehaviour:
   - Increment
   - EnvironmentDamage
   - MeleeDamage
+  - UpdateUI
+  - ShowLoseScreen
+  - ShowWinScreen
+  - UpdateHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

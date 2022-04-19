@@ -4115,6 +4115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenu: {fileID: 2072673190}
   InputScreen: {fileID: 1363170224}
+  PlayerManager: {fileID: 482730971}
 --- !u!224 &350345893 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2233152820097383239, guid: 2629381df2a912a4a8fd17567c5ffea0, type: 3}
@@ -5830,6 +5831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: 
+  playerName: 
 --- !u!4 &482730973
 Transform:
   m_ObjectHideFlags: 0
