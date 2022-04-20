@@ -5,4 +5,5 @@ using UnityEngine;
 public class StringConstants
 {
     public const string CustomProperties_PlayerHealth = "PlayerHealth";
+    public const string CustomProperties_PlayerName = "PlayerName";
 }

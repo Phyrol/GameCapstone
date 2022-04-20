@@ -54,6 +54,9 @@ MonoBehaviour:
   - ShowLoseScreen
   - ShowWinScreen
   - UpdateHealth
+  - UpdatePlayerList
+  - AddPlayerToList
+  - RemovePlayerFromList
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
