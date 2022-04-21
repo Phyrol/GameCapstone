@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6818753671217078068}
   - component: {fileID: 6818753671201872500}
   - component: {fileID: 6818753671201907668}
+  - component: {fileID: 3614568979296282694}
+  - component: {fileID: 739728116347754433}
   m_Layer: 0
   m_Name: FX_Poison
   m_TagString: Untagged
@@ -4810,3 +4812,30 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!65 &3614568979296282694
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818753671217496852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7888622, y: 2.573228, z: 2.876605}
+  m_Center: {x: 0.012191772, y: 1.0060539, z: 0.087391794}
+--- !u!114 &739728116347754433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818753671217496852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2333fb05663f9d4b97dc7f93c5972b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToPlayer: 1
+  damageTimer: 1
