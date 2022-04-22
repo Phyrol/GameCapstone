@@ -18,6 +18,9 @@ public class LevelUIHandler : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI localPlayerHealthText;
 
+    [SerializeField]
+    private TextMeshProUGUI localPlayerHealthTextShadow;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -34,7 +37,12 @@ public class LevelUIHandler : MonoBehaviour
         {
             Debug.Log($"Updating UI for {playerNum}");
             //Debug.Log($"{player.CustomProperties[StringConstants.CustomProperties_PlayerHealth]}");
-            if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber) localPlayerHealthText.text = $"{player.CustomProperties[StringConstants.CustomProperties_PlayerHealth]}%";
+            if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                localPlayerHealthText.text = $"{player.CustomProperties[StringConstants.CustomProperties_PlayerHealth]}%";
+                localPlayerHealthTextShadow.text = $"{player.CustomProperties[StringConstants.CustomProperties_PlayerHealth]}%";
+            } 
+            
         }
     }
 

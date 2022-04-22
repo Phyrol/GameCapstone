@@ -33,6 +33,8 @@ public class Hazard : MonoBehaviour
                 //Debug.Log($"Hazard number: {hazardActorNum}");
                 if (!damagedPlayer)
                 {
+                    other.gameObject.GetComponentInChildren<Animator>().SetTrigger("isPunched");
+                    FindObjectOfType<AudioManager>().Play("Damage");
                     other.gameObject.GetComponent<PhotonView>().RPC("EnvironmentDamage", RpcTarget.All, new object[] { damageToPlayer, playerActorNum });
                     StartCoroutine(DamagePlayerTimer());
                 }

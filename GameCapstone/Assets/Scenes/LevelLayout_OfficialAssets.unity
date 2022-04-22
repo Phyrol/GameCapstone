@@ -49558,6 +49558,7 @@ MonoBehaviour:
   winScreen: {fileID: 741117655}
   loseScreen: {fileID: 698394256}
   localPlayerHealthText: {fileID: 910443988}
+  localPlayerHealthTextShadow: {fileID: 910443989}
 --- !u!1001 &1384740711
 PrefabInstance:
   m_ObjectHideFlags: 0
