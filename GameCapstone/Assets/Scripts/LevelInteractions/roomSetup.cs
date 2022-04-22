@@ -18,8 +18,8 @@ public class roomSetup : MonoBehaviourPunCallbacks
             Debug.Log("--Making Death wall--");
             GameObject wall = PhotonNetwork.InstantiateRoomObject("DeathWALL", new Vector3(0, 0, 0), Quaternion.identity, 0, null);
 
-            if(wall != null)
-                DontDestroyOnLoad(wall);
+            //if(wall != null)
+            //    DontDestroyOnLoad(wall);
         }
         else
         {
