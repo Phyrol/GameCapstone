@@ -65,7 +65,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", $"PhotonPlayer{charName}"), spawnPoints[spawnNum].transform.position, Quaternion.identity);
         //Destroy(spawnPoints[rnd]);
 
-        DontDestroyOnLoad(player);
+        //DontDestroyOnLoad(player);
     }
 }
 

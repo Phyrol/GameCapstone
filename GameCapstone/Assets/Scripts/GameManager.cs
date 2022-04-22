@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager instance;
 
@@ -49,5 +49,10 @@ public class GameManager : MonoBehaviour
         {
             LevelUIHandler.instance.ShowWinScreen(aliveList[0].ActorNumber);
         }
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdatePlayerAliveCount();
     }
 }
