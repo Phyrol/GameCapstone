@@ -81,22 +81,20 @@ public class Health : MonoBehaviour
     }
 
     [PunRPC]
-    void Dead(int viewID)
+    void Dead(int playerNum)
     {
-        if(view.ViewID == viewID)
+        if(PhotonNetwork.LocalPlayer.ActorNumber == playerNum)
         {
-            //play death animation
             GetComponentInChildren<Animator>().SetTrigger("isDead");
             FindObjectOfType<AudioManager>().Play("Death");
-            //PhotonNetwork.Destroy(gameObject);
-            //temp:
+
+            // temp way to kill player
             gameObject.GetComponent<PlayerController>().enabled = false;
-            
-            gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
             gameObject.GetComponentInChildren<Melee>().enabled = false;
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             // end temp
-            FindObjectOfType<ShowWinLose>().showLoseScreen();
+
+            LevelUIHandler.instance.ShowLoseScreen(playerNum);
             Debug.Log("I AM DEAD");
         }
     }

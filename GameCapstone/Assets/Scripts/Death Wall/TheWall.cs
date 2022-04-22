@@ -19,7 +19,7 @@ public class TheWall : MonoBehaviour //PunCallbacks
     [SerializeField]
     private double startTime = 30;
 
-    public PhotonView view;
+    private PhotonView view;
     public GameObject textObject;
 
     private TimeLimit script;
@@ -94,31 +94,6 @@ public class TheWall : MonoBehaviour //PunCallbacks
         }
 
         transform.position = gameObject.transform.position;
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (!view.IsMine)
-            return;
-
-        //check for player tag
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Player is dead!!!");
-
-            int playerViewID = other.collider.GetComponent<PhotonView>().ViewID;
-            other.collider.GetComponent<Health>().view.RPC("Dead", RpcTarget.All, new object[] { playerViewID } );
-        }
-        else
-        {
-            Debug.Log("Not Player");
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Debug.Log("Player is damaged!!!");
-        //other.gameObject.GetComponent<PhotonView>().RPC("Damage", RpcTarget.Others, new object[] { });
     }
 
     [PunRPC]

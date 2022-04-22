@@ -49,12 +49,14 @@ public class LevelUIHandler : MonoBehaviour
     [PunRPC]
     public void ShowWinScreen(int playerNum)
     {
-
+        winScreen.SetActive(true);
+        Cursor.visible = true;
     }
 
     [PunRPC]
     public void ShowLoseScreen(int playerNum)
     {
-
+        loseScreen.SetActive(true);
+        Cursor.visible = true;
     }
 }
