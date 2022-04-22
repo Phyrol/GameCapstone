@@ -49,12 +49,17 @@ public class LevelUIHandler : MonoBehaviour
     [PunRPC]
     public void ShowWinScreen(int playerNum)
     {
-
+        if(playerNum == PhotonNetwork.LocalPlayer.ActorNumber)
+        {
+            winScreen.SetActive(true);
+            Cursor.visible = true;
+        }
     }
 
     [PunRPC]
     public void ShowLoseScreen(int playerNum)
     {
-
+        loseScreen.SetActive(true);
+        Cursor.visible = true;
     }
 }
