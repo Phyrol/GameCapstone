@@ -94,6 +94,12 @@ public class Health : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             // end temp
 
+            ExitGames.Client.Photon.Hashtable newProperties = PhotonNetwork.LocalPlayer.CustomProperties;
+            newProperties[StringConstants.CustomProperties_BoolPlayerAlive] = StringConstants.CustomProperties_PlayerIsDead;
+            PhotonNetwork.LocalPlayer.SetCustomProperties(newProperties);
+
+            PhotonView.Get(GameManager.instance).RPC("UpdatePlayerAliveCount", RpcTarget.All);
+
             LevelUIHandler.instance.ShowLoseScreen(playerNum);
             Debug.Log("I AM DEAD");
         }

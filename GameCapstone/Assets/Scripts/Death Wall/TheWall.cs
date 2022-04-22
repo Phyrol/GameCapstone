@@ -17,7 +17,7 @@ public class TheWall : MonoBehaviour //PunCallbacks
     private double moveTimer;
     private double waitTime;
     [SerializeField]
-    private double startTime = 30;
+    private double startTime = 1; // was 30
 
     private PhotonView view;
     public GameObject textObject;
