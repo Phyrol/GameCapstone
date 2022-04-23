@@ -8,10 +8,19 @@ public class UsernameCheck : MonoBehaviour
 {
     public GameObject MainMenu;
     public GameObject InputScreen;
-    [SerializeField]
-    private GameObject PlayerManager;
+    
     //public GameObject ErrorText;
     private string username { set; get; }
+
+    private void Start()
+    {
+        if(!PlayerManager.instance.GetPlayerName().Equals(""))
+        {
+            Debug.Log($"Player name is: {PlayerManager.instance.GetPlayerName()}");
+            MainMenu.SetActive(true);
+            InputScreen.SetActive(false);
+        }
+    }
 
     public void NameCheck()
     {
@@ -44,7 +53,7 @@ public class UsernameCheck : MonoBehaviour
 
     public void SubmitName(string name)
     {
-        PlayerManager.GetComponent<PlayerManager>().SetPlayerName(name);
+        PlayerManager.instance.GetComponent<PlayerManager>().SetPlayerName(name);
     }
 
     private bool badWords(string result)

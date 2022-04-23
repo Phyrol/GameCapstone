@@ -6,6 +6,8 @@ using Photon.Realtime;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager instance;
+
     [SerializeField]
     private string playerPrefab;
 
@@ -16,6 +18,9 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
+
         _player = PhotonNetwork.LocalPlayer;
     }
 
