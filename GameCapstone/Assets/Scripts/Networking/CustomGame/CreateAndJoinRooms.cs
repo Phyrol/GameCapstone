@@ -15,6 +15,11 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public TextMeshProUGUI countFront;
     public TextMeshProUGUI countBack;
 
+    [SerializeField]
+    private GameObject failedToJoinText;
+
+    private byte maxPlayers = 8;
+
     void Start()
     {
         // The start button will only appear for the host
@@ -24,7 +29,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(createInput.text);
+        RoomOptions options = new RoomOptions();
+        options.MaxPlayers = maxPlayers;
+
+        PhotonNetwork.CreateRoom(createInput.text, options);
     }
 
     public void JoinRoom()
@@ -35,6 +43,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel(2);
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        failedToJoinText.GetComponent<Text>().text = $"Failed to Join Room: {message}";
+        failedToJoinText.SetActive(true);
     }
 
     public void StartCustomGame()
