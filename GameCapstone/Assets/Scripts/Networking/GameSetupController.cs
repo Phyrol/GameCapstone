@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class GameSetupController : MonoBehaviourPunCallbacks
+public class GameSetupController : MonoBehaviour //PunCallbacks
 {
     public GameObject playerCam;
     private GameObject spawnPointList;
@@ -13,6 +13,8 @@ public class GameSetupController : MonoBehaviourPunCallbacks
 
     private PhotonView view;
     private int spawnNum;
+    private int scramble;
+    private bool once;
 
     private void Start()
     {
@@ -27,10 +29,35 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             spawnPoints[i] = child.gameObject;
             i++;
         }
-            
-        CreatePlayer();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //Debug.Log("I am master");
+            scramble = (int)(Random.Range(0, 8));
+            view.RPC("SetAll", RpcTarget.AllBuffered, scramble);
+        }
+
+        once = true;
+        //CreatePlayer();
 
          // create a networked player object for each player that loads into the mulplayer room
+    }
+
+    [PunRPC]
+    void SetAll(int number)
+    {
+        //Debug.Log("scramble set to" + number);
+        scramble = number;
+    }
+
+    private void Update()
+    {
+        if (once)
+        {
+            CreatePlayer();
+            once = false;
+        }
+           
     }
 
     private void CreatePlayer()
@@ -57,11 +84,14 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         Debug.Log($"Spawning: {charName}");
         //GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", $"PhotonPlayer{charName}"), spawnPos, Quaternion.identity);
         spawnNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
-        if(spawnNum > 9)
+        //Debug.Log("Player " + spawnNum + " and scramble = " + scramble);
+        spawnNum += scramble;
+        if(spawnNum > 8)
         {
-            Debug.Log("Hitting limit!!!");
-            spawnNum = 0;
+            //Debug.Log("Hitting limit!");
+            spawnNum -= 9;
         }
+        
         GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", $"PhotonPlayer{charName}"), spawnPoints[spawnNum].transform.position, Quaternion.identity);
         //Destroy(spawnPoints[rnd]);
 
