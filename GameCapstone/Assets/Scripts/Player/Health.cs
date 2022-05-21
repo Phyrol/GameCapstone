@@ -27,9 +27,11 @@ public class Health : MonoBehaviour
     }
 
     [PunRPC]
-    void MeleeDamage(Vector3 direction, float damage)
+    void MeleeDamage(Vector3 direction, float damage, int playerNum)
     {
-        if(gameObject.layer != 6)
+        int myPlayerNum = GetLocalActorNum();
+
+        if (playerNum == myPlayerNum && gameObject.layer != 6)
         {
             GetComponentInChildren<Animator>().SetTrigger("isPunched");
             FindObjectOfType<AudioManager>().Play("Damage");
@@ -48,8 +50,9 @@ public class Health : MonoBehaviour
             newProperties[StringConstants.CustomProperties_PlayerHealth] = StartingPercent;
             PhotonNetwork.LocalPlayer.SetCustomProperties(newProperties);
 
-            Debug.Log($"{PhotonNetwork.LocalPlayer.ActorNumber}");
-            PhotonView.Get(LevelUIHandler.instance).RPC("UpdateHealth", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber);
+            //Debug.Log($"{PhotonNetwork.LocalPlayer.ActorNumber}");
+            LevelUIHandler.instance.UpdateHealth(myPlayerNum);
+            //PhotonView.Get(LevelUIHandler.instance).RPC("UpdateHealth", RpcTarget.All, myPlayerNum);
 
             //HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
 
@@ -60,7 +63,7 @@ public class Health : MonoBehaviour
     [PunRPC]
     void EnvironmentDamage(float damage, int playerNum)
     {
-        int myPlayerNum = PhotonNetwork.LocalPlayer.ActorNumber;
+        int myPlayerNum = GetLocalActorNum();
 
         if(myPlayerNum == playerNum)
         {
@@ -70,7 +73,7 @@ public class Health : MonoBehaviour
             newProperties[StringConstants.CustomProperties_PlayerHealth] = StartingPercent;
             PhotonNetwork.LocalPlayer.SetCustomProperties(newProperties);
 
-            Debug.Log($"My player number: {PhotonNetwork.LocalPlayer.ActorNumber}");
+            //Debug.Log($"My player number: {PhotonNetwork.LocalPlayer.ActorNumber}");
 
             LevelUIHandler.instance.UpdateHealth(myPlayerNum);
 
@@ -109,6 +112,11 @@ public class Health : MonoBehaviour
     {
         StartingPercent += damage;
         HealthDisplay.Instance.SetHealthDisplay(StartingPercent);
+    }
+
+    int GetLocalActorNum()
+    {
+        return PhotonNetwork.LocalPlayer.ActorNumber;
     }
 
     IEnumerator EmitTrail()

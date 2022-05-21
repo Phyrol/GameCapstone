@@ -31,7 +31,8 @@ public class LevelUIHandler : MonoBehaviour
     public void UpdateHealth(int playerNum)
     {
         int num = playerNum - 1;
-        Player player = PhotonNetwork.PlayerList[num];
+        //Player player = PhotonNetwork.PlayerList[num];
+        Player player = PhotonNetwork.LocalPlayer;
 
         if(player.CustomProperties.ContainsKey(StringConstants.CustomProperties_PlayerHealth))
         {
@@ -41,8 +42,7 @@ public class LevelUIHandler : MonoBehaviour
             {
                 localPlayerHealthText.text = $"{player.CustomProperties[StringConstants.CustomProperties_PlayerHealth]}%";
                 localPlayerHealthTextShadow.text = $"{player.CustomProperties[StringConstants.CustomProperties_PlayerHealth]}%";
-            } 
-            
+            }
         }
     }
 
