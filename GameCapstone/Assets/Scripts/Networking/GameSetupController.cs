@@ -8,7 +8,7 @@ public class GameSetupController : MonoBehaviour //PunCallbacks
 {
     public GameObject playerCam;
     private GameObject spawnPointList;
-    private GameObject[] spawnPoints = new GameObject[9];
+    private List<GameObject> spawnPoints;
     public int numberPlayers;
 
     private PhotonView view;
@@ -18,6 +18,7 @@ public class GameSetupController : MonoBehaviour //PunCallbacks
 
     private void Start()
     {
+        spawnPoints = new List<GameObject>();
         view = gameObject.GetComponent<PhotonView>();
 
         spawnPointList = GameObject.Find("SpawnPoints");
@@ -26,19 +27,18 @@ public class GameSetupController : MonoBehaviour //PunCallbacks
         int i = 0;
         foreach (Transform child in spawnPointList.transform)
         {
-            spawnPoints[i] = child.gameObject;
-            i++;
+            spawnPoints.Add(child.gameObject);
         }
 
         if (PhotonNetwork.IsMasterClient)
         {
             //Debug.Log("I am master");
-            scramble = (int)(Random.Range(0, 8));
+            scramble = (int)(Random.Range(0, spawnPoints.Count));
             view.RPC("SetAll", RpcTarget.AllBuffered, scramble);
         }
 
         once = true;
-        //CreatePlayer();
+        CreatePlayer();
 
          // create a networked player object for each player that loads into the mulplayer room
     }
@@ -52,11 +52,11 @@ public class GameSetupController : MonoBehaviour //PunCallbacks
 
     private void Update()
     {
-        if (once)
-        {
-            CreatePlayer();
-            once = false;
-        }
+        //if (once)
+        //{
+        //    CreatePlayer();
+        //    once = false;
+        //}
            
     }
 
@@ -93,9 +93,16 @@ public class GameSetupController : MonoBehaviour //PunCallbacks
         }
         
         GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", $"PhotonPlayer{charName}"), spawnPoints[spawnNum].transform.position, Quaternion.identity);
+        gameObject.GetComponent<PhotonView>().RPC("RemoveSpawnPoint", RpcTarget.All, new object[] { spawnNum });
         //Destroy(spawnPoints[rnd]);
 
         //DontDestroyOnLoad(player);
+    }
+
+    [PunRPC]
+    void RemoveSpawnPoint(int num)
+    {
+        spawnPoints.RemoveAt(num);
     }
 }
 

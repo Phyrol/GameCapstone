@@ -11631,6 +11631,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 9089238204695628256, guid: 531c7d400f5247041a91b481916bf69e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.23
+      objectReference: {fileID: 0}
     - target: {fileID: 9089238205253083082, guid: 531c7d400f5247041a91b481916bf69e, type: 3}
       propertyPath: m_Name
       value: SpawnPoints
@@ -11678,6 +11682,10 @@ PrefabInstance:
     - target: {fileID: 9089238205253083083, guid: 531c7d400f5247041a91b481916bf69e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089238205969846440, guid: 531c7d400f5247041a91b481916bf69e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28.85
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 531c7d400f5247041a91b481916bf69e, type: 3}
@@ -69956,7 +69964,7 @@ Transform:
   m_LocalScale: {x: 0.4121914, y: 2.8575325, z: 0.77822}
   m_Children: []
   m_Father: {fileID: 4375271458004364649}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &946081354600007059
 MeshRenderer:
@@ -70421,9 +70429,9 @@ Transform:
   m_LocalPosition: {x: -3.9500008, y: 2.086, z: -0.06672859}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 804126794870267683}
   - {fileID: 4375271457715975313}
   - {fileID: 4375271458484942753}
-  - {fileID: 804126794870267683}
   - {fileID: 4375271457849853719}
   - {fileID: 6817765272623026941}
   - {fileID: 1699516284162543512}
