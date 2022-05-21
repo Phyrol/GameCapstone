@@ -86,7 +86,7 @@ public class Health : MonoBehaviour
     [PunRPC]
     void Dead(int playerNum)
     {
-        if(PhotonNetwork.LocalPlayer.ActorNumber == playerNum)
+        if(PhotonNetwork.LocalPlayer.ActorNumber == playerNum && !GameManager.instance.IsGameOver())
         {
             GetComponentInChildren<Animator>().SetTrigger("isDead");
             FindObjectOfType<AudioManager>().Play("Death");

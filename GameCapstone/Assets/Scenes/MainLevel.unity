@@ -25265,6 +25265,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 424700391179224236, guid: 9a243147a01e0274a80754065e521d61, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 776192507}
+    - target: {fileID: 424700391179224236, guid: 9a243147a01e0274a80754065e521d61, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuitToMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2351735556669232227, guid: 9a243147a01e0274a80754065e521d61, type: 3}
       propertyPath: m_Name
       value: PlayerOverlay
@@ -25353,12 +25361,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3340873340343114322, guid: 9a243147a01e0274a80754065e521d61, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 776192507}
+    - target: {fileID: 3340873340343114322, guid: 9a243147a01e0274a80754065e521d61, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuitToMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7134074954709643605, guid: 9a243147a01e0274a80754065e521d61, type: 3}
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8376818005018196026, guid: 9a243147a01e0274a80754065e521d61, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 776192507}
+    - target: {fileID: 8376818005018196026, guid: 9a243147a01e0274a80754065e521d61, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuitToMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a243147a01e0274a80754065e521d61, type: 3}
+--- !u!1 &776192506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2351735556669232227, guid: 9a243147a01e0274a80754065e521d61, type: 3}
+  m_PrefabInstance: {fileID: 776192505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &776192507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776192506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064267de0e0b30c449e0acf25020bbe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &778816872
 PrefabInstance:
   m_ObjectHideFlags: 0
