@@ -9,6 +9,9 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
     [SerializeField]
     private PlayerListing _playerListing;
 
+    [SerializeField]
+    private Transform usernameList;
+
     private List<PlayerListing> _listings = new List<PlayerListing>();
 
     private void Awake()
@@ -26,7 +29,7 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
 
     private void AddPlayerListing(Player player)
     {
-        PlayerListing listing = _playerListing;
+        PlayerListing listing = Instantiate(_playerListing, usernameList); ;
         if (listing != null)
         {
             listing.SetPlayerInfo(player);
@@ -44,8 +47,8 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
         int index = _listings.FindIndex(x => x.Player == otherPlayer);
         if(index != -1)
         {
-            //Destroy(_listings[index].gameObject);
-            _listings[index].RemovePlayer(otherPlayer);
+            Destroy(_listings[index].gameObject);
+            //_listings[index].RemovePlayer(otherPlayer);
             _listings.RemoveAt(index);
         }
     }

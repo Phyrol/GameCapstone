@@ -53,7 +53,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void StartCustomGame()
     {
-        if (PhotonNetwork.IsMasterClient) StartCoroutine(startCountdown());
+        //if (PhotonNetwork.IsMasterClient)
+        StartCoroutine(startCountdown());
     }
 
     public void LoadMainLevel()
