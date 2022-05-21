@@ -63,8 +63,9 @@ public class Melee : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            int playerNum = other.GetComponent<PhotonView>().OwnerActorNr;
             //Debug.Log("DAMAGING");
-            other.gameObject.GetComponent<PhotonView>().RPC("MeleeDamage", RpcTarget.Others, new object[] { new Vector3(transform.parent.transform.right.x * 10, 5, 0), punchDamage });
+            other.gameObject.GetComponent<PhotonView>().RPC("MeleeDamage", RpcTarget.Others, new object[] { new Vector3(transform.parent.transform.right.x * 10, 5, 0), punchDamage, playerNum });
         }
         if(col != null) col.enabled = false;
     }

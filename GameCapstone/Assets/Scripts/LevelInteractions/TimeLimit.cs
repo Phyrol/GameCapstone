@@ -20,7 +20,7 @@ public class TimeLimit : MonoBehaviour
     private void Awake()
     {
         timeView = gameObject.GetComponent<PhotonView>();
-        gameObject.tag = "Wall";
+        //gameObject.tag = "Wall";
     }
 
     // Start is called before the first frame update
