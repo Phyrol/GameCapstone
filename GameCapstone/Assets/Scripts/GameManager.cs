@@ -11,13 +11,15 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private int playersAliveCount;
 
+    private bool gameOver = false;
+
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         if(PhotonNetwork.IsConnected)
         {
@@ -48,7 +50,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         if(playersAliveCount == 1)
         {
             LevelUIHandler.instance.ShowWinScreen(aliveList[0].ActorNumber);
+            gameOver = true;
         }
+    }
+
+    public bool IsGameOver()
+    {
+        return gameOver;
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
